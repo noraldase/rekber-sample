@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Akun — REKBER HB</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('rekber-theme')||'dark';</script>
+  <style>
+    .detail-shell{max-width:640px;margin:0 auto;padding:60px 24px}
+    .detail-card{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+    .detail-header{background:linear-gradient(180deg,rgba(255,71,87,.08),transparent);padding:28px;text-align:center;border-bottom:1px solid var(--line)}
+    .detail-header .status{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--red);background:rgba(255,71,87,.12);border:1px solid rgba(255,71,87,.3);padding:6px 14px;border-radius:100px;margin-bottom:14px}
+    .detail-header h1{font-size:26px;font-weight:800;word-break:break-all}
+    .detail-header .date{color:var(--muted);font-size:14px;margin-top:6px}
+    .detail-body{padding:24px 28px}
+    .detail-row{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+    .detail-row:last-child{border-bottom:none}
+    .detail-row span{color:var(--muted)}
+    .detail-row strong{text-align:right;word-break:break-all}
+    .photo{margin:0 auto 20px;display:block;max-width:140px;border-radius:14px;border:1px solid var(--line)}
+    .approved-badge{display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:var(--green);font-size:12px;font-weight:700;padding:5px 12px;border-radius:100px}
+    .back-link{display:block;text-align:center;margin-top:24px;color:var(--blue);font-weight:700;font-size:14px}
+    .danger-banner{background:rgba(255,71,87,.1);border:1px solid rgba(255,71,87,.3);color:var(--red);text-align:center;padding:14px;font-weight:700;font-size:14px}
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo"><div class="logo-mark">R</div><div>REKBER HB<small>Database Akun Berbahaya</small></div></a>
+      <div class="nav-links">
+        <a href="index.html">Cek ID</a>
+        <a href="lapor.html">Lapor</a>
+        <a href="list.html">Daftar HB</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle">🌙</button>
+    </div>
+  </nav>
+
+  <main class="detail-shell">
+    <div class="detail-card">
+      <div class="detail-header">
+        <span class="status">⚠️ AKUN BERBAHAYA</span>
+        <h1 id="detailTitle">Memuat...</h1>
+        <div id="approvedBadge"></div>
+        <div class="date" id="detailDate"></div>
+      </div>
+      <div class="detail-body" id="detailBody">
+        <div class="detail-row"><span>Status</span><strong>Memuat data...</strong></div>
+      </div>
+    </div>
+    <a class="back-link" href="search.html">← Cek ID Lain</a>
+  </main>
+
+  <script src="assets/js/config.js"></script>
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('rekber-theme') || 'dark';
+    themeToggle.textContent = saved === 'dark' ? '☀️' : '🌙';
+    themeToggle.onclick = () => {
+      const t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = t;
+      localStorage.setItem('rekber-theme', t);
+      themeToggle.textContent = t === 'dark' ? '☀️' : '🌙';
+    };
+
+    function escapeHtml(str) {
+      if (str == null) return '';
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+
+    const params = new URLSearchParams(location.search);
+    const id = params.get('id');
+
+    async function load() {
+      if (!id) { location.href = 'search.html'; return; }
+      try {
+        const res = await fetch(`${window.API_BASE}/api/hb/${encodeURIComponent(id)}`);
+        const json = await res.json();
+        if (!json.ok || !json.data) {
+          document.getElementById('detailTitle').textContent = `${id} TIDAK TERDAFTAR`;
+          document.getElementById('detailBody').innerHTML = '<div class="detail-row"><span>Status</span><strong>ID tidak terdaftar</strong></div>';
+          document.querySelector('.detail-header .status').textContent = 'ID HB TIDAK DITEMUKAN';
+          return;
+        }
+        const r = json.data;
+        document.getElementById('detailTitle').textContent = `${r.id_game} (${r.server})`;
+        document.getElementById('detailDate').textContent = `Tanggal HB: ${r.hb_date || '-'}`;
+        if (r.approved_by) {
+          document.getElementById('approvedBadge').innerHTML = `<span class="approved-badge">✓ Approved by ${escapeHtml(r.approved_by)}</span>`;
+        }
+        document.getElementById('detailBody').innerHTML = `
+          ${r.image_path ? `<img class="photo" src="${window.API_BASE}/uploads/${r.image_path}" alt="Foto akun">` : ''}
+          <div class="detail-row"><span>ID Game</span><strong>${escapeHtml(r.id_game)}</strong></div>
+          <div class="detail-row"><span>Server</span><strong>${escapeHtml(r.server)}</strong></div>
+          <div class="detail-row"><span>Tanggal Transaksi</span><strong>${r.transaction_date || '-'}</strong></div>
+          <div class="detail-row"><span>Tanggal HB</span><strong>${r.hb_date || '-'}</strong></div>
+          <div class="detail-row"><span>Nama Pelaku</span><strong>${escapeHtml(r.offender_name)}</strong></div>
+          <div class="detail-row"><span>WhatsApp Pelaku</span><strong>${escapeHtml(r.offender_wa || '-')}</strong></div>
+          <div class="detail-row"><span>FB Pelapor</span><strong>${escapeHtml(r.reporter_fb)}</strong></div>
+          <div class="detail-row"><span>WA Pelapor</span><strong>${escapeHtml(r.reporter_wa)}</strong></div>
+          <div class="detail-row"><span>WA Korban</span><strong>${escapeHtml(r.victim_wa || '-')}</strong></div>
+          <div class="danger-banner" style="margin-top:20px">⚠️ HINDARI transaksi dengan akun ini</div>
+        `;
+      } catch (err) {
+        document.getElementById('detailBody').innerHTML = `<div class="detail-row"><span>Error</span><strong>${escapeHtml(err.message)}</strong></div>`;
+      }
+    }
+    load();
+  </script>
+</body>
+</html>

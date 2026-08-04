@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REKBER HB — Database Akun Berbahaya</title>
+  <meta name="description" content="Database akun berbahaya (HB) untuk komunitas Rekber. Cek ID game sebelum transaksi.">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('rekber-theme') || 'dark';</script>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="assets/img/logo.png">
+</head>
+<body>
+
+  <!-- Background Effects -->
+  <div class="bg-mesh" aria-hidden="true"></div>
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">R</div>
+        <div>REKBER HB<small>Database Akun Berbahaya</small></div>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="active">Cek ID</a>
+        <a href="lapor.html">Lapor</a>
+        <a href="search.html">Cari</a>
+        <a href="list.html">Daftar HB</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle" title="Ganti mode">🌙</button>
+    </div>
+  </nav>
+
+  <!-- HERO + SEARCH -->
+  <main class="hero">
+    <div class="container">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Database Aktif — <span id="count">0</span> Akun Tercatat
+      </div>
+
+      <h1>Cek ID Game<br><span class="text-gradient">Sebelum Transaksi</span></h1>
+      <p>Masukkan ID Game (tanpa server) untuk memeriksa apakah akun pernah dilaporkan sebagai HB.</p>
+
+      <form class="search-box" id="searchForm">
+        <input type="text" inputmode="numeric" name="gameId" placeholder="Masukkan ID Game (contoh: 336908795)" autocomplete="off" required>
+        <button type="submit">
+          <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          Cari
+        </button>
+      </form>
+
+      <div class="search-result" id="searchResult" style="display:none;">
+        <!-- Result will be populated by JS -->
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-num" id="statApproved">0</span>
+          <span class="stat-label">Approved</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num pending" id="statPending">0</span>
+          <span class="stat-label">Pending</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" id="statTotal">0</span>
+          <span class="stat-label">Total</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FEATURES -->
+  <section class="section">
+    <div class="container">
+      <h2>Cara Kerja</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="num">1</span>
+          <h3>Cek ID</h3>
+          <p>Masukkan ID Game sebelum transaksi untuk cek history.</p>
+        </div>
+        <div class="step">
+          <span class="num">2</span>
+          <h3>Lapor</h3>
+          <p>Ketemu akun scam? Kirim laporan + bukti ke admin.</p>
+        </div>
+        <div class="step">
+          <span class="num">3</span>
+          <h3>Admin Approves</h3>
+          <p>Admin verifikasi via Telegram. Approved = masuk database.</p>
+        </div>
+        <div class="step">
+          <span class="num">4</span>
+          <h3>Public Search</h3>
+          <p>ID yang approved bisa dicari siapa saja di situs ini.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© <span id="year"></span> REKBER HB — Database Akun Berbahaya</p>
+      <p class="disclaimer">⚠️ Selalu verifikasi ID di situs ini sebelum transaksi. Admin tidak bertanggung jawab atas transaksi di luar rekber.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
