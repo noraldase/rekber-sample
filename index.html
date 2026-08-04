@@ -553,36 +553,60 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
 .cek-bukti img{max-width:190px;border-radius:12px;border:1px solid var(--line);cursor:pointer;box-shadow:var(--shadow)}
 .cek-bukti img:hover{transform:scale(1.02)}
 
-/* ===== MODAL CARA REKBER (gambar asli) ===== */
-.rekber-modal{
-  position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;
-  background:rgba(2,5,8,.88);backdrop-filter:blur(8px);padding:18px;
+/* ===== IMAGE VIEWER (layar penuh, zoom-out + geser) ===== */
+.viewer{
+  position:fixed;inset:0;z-index:300;display:none;
+  background:rgba(2,5,10,.94);backdrop-filter:blur(10px);
 }
-.rekber-modal.open{display:flex;animation:fadeIn .25s}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.rekber-frame{
-  position:relative;width:min(480px,100%);max-height:min(760px,92vh);overflow:hidden;
-  background:#fff;border-radius:20px;border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 40px 100px -24px rgba(0,0,0,.85);
-  animation:popIn .3s cubic-bezier(.34,1.4,.64,1);
+.viewer.open{display:block;animation:fadeIn .2s}
+.v-stage{
+  position:absolute;inset:0;overflow:hidden;
+  cursor:grab;touch-action:none;
 }
-@keyframes popIn{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
-.rekber-frame .rc-x{
-  position:absolute;top:12px;right:12px;z-index:2;
-  width:38px;height:38px;border-radius:50%;border:none;
-  background:rgba(10,14,20,.65);backdrop-filter:blur(4px);
-  color:#fff;font-size:17px;cursor:pointer;transition:background .2s,transform .2s;
+.v-stage.grabbing{cursor:grabbing}
+.v-stage img{
+  position:absolute;left:50%;top:50%;
+  max-width:94vw;max-height:88vh;width:auto;height:auto;
+  transform:translate(-50%,-50%);
+  border-radius:10px;box-shadow:0 30px 80px -20px rgba(0,0,0,.85);
+  user-select:none;-webkit-user-drag:none;pointer-events:none;
 }
-.rekber-frame .rc-x:hover{background:rgba(255,84,112,.9);transform:scale(1.1) rotate(90deg)}
-.rekber-frame .rc-body{
-  max-height:min(760px,92vh);overflow-y:auto;background:#fff;
-  scrollbar-width:thin;scrollbar-color:#ccc transparent;
+.v-stage img.moving{transition:none}
+.v-stage img.drag-mode{max-width:none;max-height:none}
+.v-x{
+  position:absolute;top:18px;right:18px;z-index:5;
+  width:46px;height:46px;border-radius:50%;border:none;
+  background:rgba(10,14,20,.6);backdrop-filter:blur(6px);
+  color:#fff;font-size:20px;cursor:pointer;
+  transition:background .2s,transform .2s;
 }
-.rc-img{display:block;width:100%;height:auto;cursor:zoom-in;transition:transform .25s ease,filter .25s ease}
-.rc-img:hover{transform:scale(1.04);filter:brightness(1.05)}
-.rc-img:active{transform:scale(.99)}
-.rc-img + .rc-img{border-top:1px solid rgba(0,0,0,.08)}
-@media(max-width:480px){.rekber-frame{width:100%}}
+.v-x:hover{background:rgba(255,84,112,.9);transform:rotate(90deg)}
+.v-arr{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:5;
+  width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.15);
+  background:rgba(10,14,20,.55);backdrop-filter:blur(6px);
+  color:#fff;font-size:26px;cursor:pointer;
+  transition:background .2s,transform .2s;
+}
+.v-arr:hover{background:rgba(45,122,255,.85);transform:translateY(-50%) scale(1.06)}
+.v-arr.prev{left:16px}.v-arr.next{right:16px}
+.v-count{
+  position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:5;
+  background:rgba(10,14,20,.65);backdrop-filter:blur(6px);
+  color:#fff;font-size:13.5px;font-weight:700;
+  padding:8px 18px;border-radius:100px;border:1px solid rgba(255,255,255,.12);
+  letter-spacing:.05em;white-space:nowrap;
+}
+.v-hint{
+  position:absolute;bottom:66px;left:50%;transform:translateX(-50%);z-index:5;
+  color:rgba(255,255,255,.75);font-size:12px;font-weight:600;
+  background:rgba(10,14,20,.5);padding:6px 14px;border-radius:100px;
+  white-space:nowrap;pointer-events:none;
+}
+@media(max-width:600px){
+  .v-arr{width:44px;height:44px;font-size:22px}
+  .v-arr.prev{left:8px}.v-arr.next{right:8px}
+}
 
 /* ===== MODAL LOGO ===== */
 .modal{
@@ -981,33 +1005,16 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
   <img id="modalImg" src="" alt="Pratinjau">
 </div>
 
-<!-- ===== MODAL CARA REKBER (gambar asli) ===== -->
-<div class="rekber-modal" id="rekberModal" onclick="if(event.target===this)closeRekber()">
-  <div class="rekber-frame">
-    <button class="rc-x" onclick="closeRekber()" aria-label="Tutup">✕</button>
-    <div class="rc-body">
-      <img class="rc-img" src="img/cara-rekber-1.jpg" alt="Cara Rekber — bagian 1" loading="lazy">
-      <img class="rc-img" src="img/cara-rekber-2.jpg" alt="Cara Rekber — lanjutan" loading="lazy">
-    </div>
+<!-- ===== IMAGE VIEWER (layar penuh — zoom-out, bisa digeser) ===== -->
+<div class="viewer" id="viewer">
+  <button class="v-x" onclick="closeViewer()" aria-label="Tutup">✕</button>
+  <button class="v-arr prev" onclick="vNav(-1)" aria-label="Sebelumnya">‹</button>
+  <button class="v-arr next" onclick="vNav(1)" aria-label="Berikutnya">›</button>
+  <div class="v-stage" id="vStage">
+    <img id="vImg" src="" alt="">
   </div>
-</div>
-
-<!-- ===== MODAL CARA AMANIN EPEP (gambar asli) ===== -->
-<div class="rekber-modal" id="epepModal" onclick="if(event.target===this)closeEpep()">
-  <div class="rekber-frame">
-    <button class="rc-x" onclick="closeEpep()" aria-label="Tutup">✕</button>
-    <div class="rc-body">
-      <img class="rc-img" src="img/amaninepep1.jpeg" alt="Cara Amanin Epep — langkah 1" loading="lazy" onclick="openModal(this.src)">
-      <img class="rc-img" src="img/amaninepep2.jpeg" alt="Cara Amanin Epep — langkah 2" loading="lazy" onclick="openModal(this.src)">
-      <img class="rc-img" src="img/amaninepep3.jpeg" alt="Cara Amanin Epep — langkah 3" loading="lazy" onclick="openModal(this.src)">
-      <img class="rc-img" src="img/amaninepep4.jpeg" alt="Cara Amanin Epep — langkah 4" loading="lazy" onclick="openModal(this.src)">
-      <img class="rc-img" src="img/amaninepep5.jpeg" alt="Cara Amanin Epep — langkah 5" loading="lazy" onclick="openModal(this.src)">
-      <img class="rc-img" src="img/amaninepep6.jpeg" alt="Cara Amanin Epep — langkah 6" loading="lazy" onclick="openModal(this.src)">
-      <img class="rc-img" src="img/amaninepep7.jpeg" alt="Cara Amanin Epep — langkah 7" loading="lazy" onclick="openModal(this.src)">
-      <img class="rc-img" src="img/amaninepep8.jpeg" alt="Cara Amanin Epep — langkah 8" loading="lazy" onclick="openModal(this.src)">
-      <img class="rc-img" src="img/amaninepep9.jpeg" alt="Cara Amanin Epep — langkah 9" loading="lazy" onclick="openModal(this.src)">
-    </div>
-  </div>
+  <div class="v-hint">👆 Geser gambar · ◀ ▶ ganti · ✕ tutup</div>
+  <div class="v-count" id="vCount">1 / 1</div>
 </div>
 
 <script>
@@ -1032,13 +1039,13 @@ function wireWa(){
     const el = document.getElementById(id);
     if(el) el.href = waLink(CONFIG.waMessage);
   });
-  // Menu layanan → WA (data-msg) atau modal (data-modal)
+  // Menu layanan → WA (data-msg) atau viewer (data-modal)
   document.querySelectorAll(".menu-item").forEach(el=>{
     if(el.dataset.modal){
       el.addEventListener("click", (e)=>{
         e.preventDefault();
-        if(el.dataset.modal === "rekber") openRekber();
-        if(el.dataset.modal === "epep") openEpep();
+        if(el.dataset.modal === "rekber") openViewer("rekber");
+        if(el.dataset.modal === "epep") openViewer("epep");
       });
     } else {
       el.href = waLink(el.dataset.msg || CONFIG.waMessage);
@@ -1046,27 +1053,70 @@ function wireWa(){
   });
 }
 
-/* ——— modal cara amanin epep (gambar) ——— */
-function openEpep(){
-  document.getElementById("epepModal").classList.add("open");
+/* ——— IMAGE VIEWER (layar penuh, zoom-out + geser) ——— */
+const VIEWERS = {
+  rekber: ["img/cara-rekber-1.jpg","img/cara-rekber-2.jpg"],
+  epep: ["img/amaninepep1.jpeg","img/amaninepep2.jpeg","img/amaninepep3.jpeg","img/amaninepep4.jpeg","img/amaninepep5.jpeg","img/amaninepep6.jpeg","img/amaninepep7.jpeg","img/amaninepep8.jpeg","img/amaninepep9.jpeg"],
+};
+let vList = [], vIdx = 0, vTx = 0, vTy = 0, vDrag = null;
+const vImg = document.getElementById("vImg");
+const vStage = document.getElementById("vStage");
+function openViewer(key){
+  vList = VIEWERS[key] || [];
+  vIdx = 0;
+  renderViewer(true);
+  document.getElementById("viewer").classList.add("open");
   document.body.style.overflow = "hidden";
 }
-function closeEpep(){
-  document.getElementById("epepModal").classList.remove("open");
+function closeViewer(){
+  document.getElementById("viewer").classList.remove("open");
   document.body.style.overflow = "";
+  vImg.classList.remove("drag-mode");
 }
-document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeEpep(); });
-
-/* ——— modal cara rekber (chat) ——— */
-function openRekber(){
-  document.getElementById("rekberModal").classList.add("open");
-  document.body.style.overflow = "hidden";
+function vNav(d){
+  if(!vList.length) return;
+  vIdx = (vIdx + d + vList.length) % vList.length;
+  renderViewer(true);
 }
-function closeRekber(){
-  document.getElementById("rekberModal").classList.remove("open");
-  document.body.style.overflow = "";
+function renderViewer(reset){
+  vImg.src = vList[vIdx];
+  document.getElementById("vCount").textContent = (vIdx + 1) + " / " + vList.length;
+  if(reset) resetPan();
 }
-document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeRekber(); });
+function resetPan(){
+  vTx = 0; vTy = 0;
+  vImg.classList.remove("drag-mode");
+  vImg.style.transform = "translate(-50%,-50%)";
+}
+/* geser (drag) gambar */
+vStage.addEventListener("pointerdown", e=>{
+  vDrag = {x: e.clientX - vTx, y: e.clientY - vTy, moved:false};
+  vStage.setPointerCapture(e.pointerId);
+  vImg.classList.add("moving");
+});
+vStage.addEventListener("pointermove", e=>{
+  if(!vDrag) return;
+  const dx = e.clientX - vDrag.x, dy = e.clientY - vDrag.y;
+  if(Math.abs(dx - vTx) > 3 || Math.abs(dy - vTy) > 3) vDrag.moved = true;
+  vTx = dx; vTy = dy;
+  vImg.style.transform = `translate(calc(-50% + ${vTx}px), calc(-50% + ${vTy}px))`;
+});
+vStage.addEventListener("pointerup", ()=>{
+  vDrag = null;
+  vImg.classList.remove("moving");
+});
+/* double-tap / double-click = mode drag penuh (zoom-out lebar) */
+vStage.addEventListener("dblclick", ()=>{
+  vImg.classList.toggle("drag-mode");
+  resetPan();
+});
+document.addEventListener("keydown", e=>{
+  if(e.key === "Escape") closeViewer();
+  if(document.getElementById("viewer").classList.contains("open")){
+    if(e.key === "ArrowLeft") vNav(-1);
+    if(e.key === "ArrowRight") vNav(1);
+  }
+});
 
 /* ——— theme ——— */
 const savedTheme = localStorage.getItem("theme") || "dark";
