@@ -343,55 +343,40 @@ nav.scrolled{background:rgba(5,10,24,.9);border-bottom:1px solid var(--line);box
 .term.danger p b{color:var(--red)}
 @media(max-width:800px){.terms{grid-template-columns:1fr}}
 
-/* ===== GARANSI ===== */
-.garansi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.g-card{
-  background:linear-gradient(180deg,rgba(45,122,255,.09),transparent 55%),var(--card-bg);
-  border:1px solid var(--line);border-radius:20px;padding:30px 24px;
-  backdrop-filter:blur(8px);transition:transform .25s,border-color .25s;
-  position:relative;overflow:hidden;
-}
-.g-card::after{content:"";position:absolute;top:-50px;right:-50px;width:120px;height:120px;border-radius:50%;background:rgba(91,154,255,.1);filter:blur(30px)}
-.g-card:hover{transform:translateY(-5px);border-color:rgba(91,154,255,.45)}
-.g-card .ic{
-  width:50px;height:50px;border-radius:15px;margin-bottom:18px;
-  background:rgba(91,154,255,.13);border:1px solid rgba(91,154,255,.3);
-  display:grid;place-items:center;font-size:23px;color:var(--blue);
-  box-shadow:0 8px 20px -8px var(--blue-glow);
-}
-.g-card b{display:block;font-size:17px;margin-bottom:8px}
-.g-card p{font-size:14px;color:var(--muted)}
-.g-card .note{
-  margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);
-  font-size:13px;color:var(--muted-2);
-}
-@media(max-width:900px){.garansi-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.garansi-grid{grid-template-columns:1fr}}
-
 /* ===== FEE ===== */
-.fee-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:start}
-.fee-table{
-  border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--card-bg);
-  backdrop-filter:blur(8px);
+.fee-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:36px;align-items:center}
+.fee-figure{
+  position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--line);
+  background:var(--card-bg);box-shadow:0 24px 60px -30px rgba(0,0,0,.6);
 }
-.fee-row{display:grid;grid-template-columns:1.6fr 1fr;gap:12px;padding:18px 24px;align-items:center}
-.fee-row.head{background:var(--surface-solid);font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.fee-row:not(.head){border-top:1px solid var(--line);transition:background .2s}
-.fee-row:not(.head):hover{background:rgba(91,154,255,.06)}
-.fee-row b{font-size:15px}
-.fee-row span{font-size:13.5px;color:var(--muted)}
-.fee-row .pct{font-weight:800;color:var(--blue);font-size:15px;text-align:right;font-family:var(--font-d)}
-.fee-note{
-  background:var(--card-bg);border:1px solid var(--line);border-radius:20px;padding:28px;
-  backdrop-filter:blur(8px);
+.fee-figure img{display:block;width:100%;height:auto;max-height:560px;object-fit:cover}
+.fee-figure .fee-badge{
+  position:absolute;top:16px;left:16px;display:flex;align-items:center;gap:8px;
+  background:rgba(6,10,18,.8);backdrop-filter:blur(8px);border:1px solid var(--line);
+  padding:8px 14px;border-radius:999px;font-size:12px;font-weight:700;color:var(--blue);
+  letter-spacing:.02em;
 }
-.fee-note b{display:flex;align-items:center;gap:10px;font-size:16px;margin-bottom:12px}
-.fee-note p{font-size:14px;color:var(--muted);margin-bottom:10px}
-.fee-note .warn{
-  border-left:3px solid var(--red);background:rgba(255,71,87,.08);
-  border-radius:0 12px 12px 0;padding:14px 16px;font-size:13.5px;color:var(--muted);
+.fee-figure::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(91,154,255,.08), inset 0 -60px 60px -40px rgba(6,8,14,.7);
 }
-.fee-note .warn b{color:var(--red);font-size:14px;display:inline}
+.fee-info h3{font-size:19px;margin:6px 0 6px;display:flex;align-items:center;gap:8px}
+.fee-info p{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:6px}
+.fee-points{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.fee-point{
+  display:flex;gap:14px;align-items:flex-start;padding:14px 16px;
+  background:var(--card-bg);border:1px solid var(--line);border-radius:16px;
+  backdrop-filter:blur(8px);transition:transform .2s, border-color .2s;
+}
+.fee-point:hover{transform:translateX(4px);border-color:rgba(91,154,255,.5)}
+.fee-point .ic{
+  flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
+  font-size:18px;background:rgba(91,154,255,.1);border:1px solid rgba(91,154,255,.22);
+}
+.fee-point .pp b{display:block;font-size:14.5px;margin-bottom:2px}
+.fee-point .pp span{font-size:13px;color:var(--muted);line-height:1.5}
+.fee-point .val{margin-left:auto;align-self:center;font-weight:800;color:var(--blue);font-family:var(--font-d);white-space:nowrap}
+.fee-point .val.red{color:var(--red)}
 @media(max-width:900px){.fee-wrap{grid-template-columns:1fr}}
 
 /* ===== TESTIMONI ===== */
@@ -674,8 +659,6 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
     <div class="nav-links" id="navLinks">
       <a href="#beranda" class="active">Beranda</a>
       <a href="#panduan">Panduan</a>
-      <a href="#aturan">Aturan</a>
-      <a href="#garansi">Garansi</a>
       <a href="#fee">Fee</a>
       <a href="#testimoni">Testimoni</a>
       <a href="#faq">FAQ</a>
@@ -734,11 +717,11 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
     <span>Jual Beli Aman Bersama Revi Sri Mega Azzahra</span>
     <span>Hubungi kami untuk Jasa Rekber</span>
     <span>Transaksi Lokal &amp; Internasional</span>
-    <span>Garansi Transaksi</span>
+    <span>Fee Transparan Tanpa Biaya Tersembunyi</span>
     <span>Jual Beli Aman Bersama Revi Sri Mega Azzahra</span>
     <span>Hubungi kami untuk Jasa Rekber</span>
     <span>Transaksi Lokal &amp; Internasional</span>
-    <span>Garansi Transaksi</span>
+    <span>Fee Transparan Tanpa Biaya Tersembunyi</span>
   </div>
 </div>
 
@@ -804,57 +787,6 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
   </div>
 </section>
 
-<!-- ===== ATURAN ===== -->
-<section class="section" id="aturan" style="padding-top:20px">
-  <div class="container">
-    <span class="section-tag reveal">⚖️ Terms of Service</span>
-    <h2 class="reveal">Aturan Sebelum Transaksi</h2>
-    <p class="lead reveal">Harap baca dan pahami seluruh aturan berikut sebelum memulai transaksi.</p>
-    <div class="terms">
-      <div class="term reveal"><span class="n">1</span><p>Pembeli &amp; penjual wajib setuju bahwa transaksi menggunakan jasa rekber <b>Revi Sri Mega Azzahra</b> sebagai pihak ketiga yang netral dan mengikat kedua belah pihak.</p></div>
-      <div class="term reveal d1"><span class="n">2</span><p>Barang yang diperjualbelikan wajib <b>halal dan legal</b>. Transaksi yang mengandung unsur penipuan, judi ilegal, atau ilegal lainnya <b>tidak dilayani</b>.</p></div>
-      <div class="term reveal d2"><span class="n">3</span><p>Seluruh komunikasi transaksi wajib melalui <b>group WA resmi</b> yang berisi admin, pembeli, dan penjual. Transaksi di luar group <b>bukan tanggung jawab rekber</b>.</p></div>
-      <div class="term reveal d3"><span class="n">4</span><p>Dana yang masuk ke rekening admin <b>dikunci</b> sampai kedua pihak konfirmasi. Tidak ada pencairan sepihak tanpa persetujuan bersama.</p></div>
-      <div class="term reveal"><span class="n">5</span><p>Pembeli wajib <b>mencek barang/akun dalam waktu yang disepakati</b> sebelum konfirmasi DONE. Setelah DONE, transaksi dianggap selesai.</p></div>
-      <div class="term reveal d1"><span class="n">6</span><p>Penjual wajib <b>bertanggung jawab penuh</b> atas barang yang dijual. Jika akun bermasalah setelah DONE karena kesalahan penjual, identitas penjual akan diserahkan kepada pembeli sesuai perjanjian.</p></div>
-      <div class="term reveal d2"><span class="n">7</span><p><b>Kesepakatan garansi</b> antara penjual &amp; pembeli harus ditulis jelas di formulir transaksi. Tanpa catatan garansi, klaim di kemudian hari tidak ditanggung rekber.</p></div>
-      <div class="term reveal d3"><span class="n">8</span><p>Admin berhak <b>menolak atau membatalkan</b> transaksi jika ditemukan indikasi penipuan, duplikasi, atau pelanggaran aturan di atas.</p></div>
-      <div class="term danger reveal"><span class="n">9</span><p><b>SCAM / penipuan tidak akan ditoleransi.</b> Pelaku dilaporkan ke database akun berbahaya dan identitasnya diserahkan kepada pihak yang dirugikan.</p></div>
-      <div class="term danger reveal d1"><span class="n">10</span><p><b>Dilarang</b> melakukan transaksi pribadi (di luar rekber) dengan pembeli/penjual yang ditemukan di group. Hal ini membatalkan perlindungan garansi.</p></div>
-      <div class="term reveal d2"><span class="n">11</span><p>Biaya fee rekber dibayarkan sesuai <b>list fee yang berlaku</b> dan diumumkan di awal transaksi, tidak ada biaya tambahan di luar itu.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== GARANSI ===== -->
-<section class="section" id="garansi" style="padding-top:20px">
-  <div class="container">
-    <span class="section-tag reveal">🛡 Penjelasan Garansi</span>
-    <h2 class="reveal">Garansi Transaksi</h2>
-    <p class="lead reveal">Garansi berlaku selama transaksi berjalan sesuai kesepakatan yang tertulis. Berikut hal yang kami lindungi.</p>
-    <div class="garansi-grid">
-      <div class="g-card reveal">
-        <span class="ic">💰</span>
-        <b>Dana Aman</b>
-        <p>Dana pembeli dipegang admin sampai barang diterima dan dikonfirmasi. Tidak ada pencairan sebelum kesepakatan.</p>
-        <div class="note">Berlaku jika transaksi melalui websa rekber sesuai alur.</div>
-      </div>
-      <div class="g-card reveal d1">
-        <span class="ic">📦</span>
-        <b>Barang Sesuai</b>
-        <p>Penjual wajib mengirim barang sesuai deskripsi. Jika tidak sesuai, dana ditahan sampai masalah terselesaikan.</p>
-        <div class="note">Cek barang dalam waktu yang disepakati sebelum DONE.</div>
-      </div>
-      <div class="g-card reveal d2">
-        <span class="ic">🗂</span>
-        <b>Data Penjual</b>
-        <p>Identitas penjual diverifikasi dan dicatat. Jika penjual lari dari tanggung jawab, data diserahkan kepada pembeli.</p>
-        <div class="note">Sesuai perjanjian garansi yang tertulis di formulir.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ===== FEE ===== -->
 <section class="section" id="fee" style="padding-top:20px">
   <div class="container">
@@ -862,20 +794,33 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
     <h2 class="reveal">Fee Rekber</h2>
     <p class="lead reveal">Transparan, tidak ada biaya tersembunyi. Fee dihitung dari nominal transaksi.</p>
     <div class="fee-wrap">
-      <div class="fee-table reveal">
-        <div class="fee-row head"><span>Nominal Transaksi</span><span>Fee</span></div>
-        <div class="fee-row"><b>Rp1.000 – Rp49.000</b><span class="pct">Rp3.000</span></div>
-        <div class="fee-row"><b>Rp50.000 – Rp750.000</b><span class="pct">Rp5.000</span></div>
-        <div class="fee-row"><b>Rp750.000 – Rp999.000</b><span class="pct">Rp10.000</span></div>
-        <div class="fee-row"><b>Rp1.000.000 – Rp2.999.000</b><span class="pct">Rp15.000</span></div>
-        <div class="fee-row"><b>Rp3.000.000 ke atas</b><span class="pct">0,7%</span></div>
+      <div class="fee-figure reveal">
+        <span class="fee-badge">💳 LIST FEE</span>
+        <img src="img/infokontak-fee.jpg" alt="List fee rekber Revi Rekber" loading="lazy" />
       </div>
-      <div class="fee-note reveal">
-        <b>ℹ️ Biaya Tambahan</b>
-        <p><b>Delay</b> (keterlambatan pembayaran): <b>Rp1.500 per hari</b>.</p>
-        <b style="margin-top:16px">🕐 Jam Operasional</b>
-        <p><b>Setiap hari (Open Everyday)</b>, pukul <b>06.30 – 23.30</b>.</p>
-        <div class="warn"><b>Catatan:</b> Jangan transfer ke rekening selain yang diberikan admin di group resmi. Cek selalu nama rekening di atas sebelum transfer.</div>
+      <div class="fee-info reveal d1">
+        <h3>ℹ️ Informasi Penting</h3>
+        <p>Detail lengkap nominal &amp; fee bisa dilihat dari gambar. Beberapa hal yang perlu kamu tahu:</p>
+        <div class="fee-points">
+          <div class="fee-point">
+            <span class="ic">🕐</span>
+            <div class="pp"><b>Jam Operasional</b><span>Buka <b>setiap hari</b>, pukul</span></div>
+            <span class="val">06.30–23.30</span>
+          </div>
+          <div class="fee-point">
+            <span class="ic">⏳</span>
+            <div class="pp"><b>Delay</b><span>Keterlambatan pembayaran dikenakan</span></div>
+            <span class="val red">Rp1.500/hari</span>
+          </div>
+          <div class="fee-point">
+            <span class="ic">🛡</span>
+            <div class="pp"><b>Tanpa Fee Tersembunyi</b><span>Biaya sesuai list, diumumkan di awal transaksi</span></div>
+          </div>
+          <div class="fee-point">
+            <span class="ic">⚠️</span>
+            <div class="pp"><b>Transfer Aman</b><span>Jangan transfer ke rekening selain yang diberikan admin di group resmi</span></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1010,8 +955,6 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
         <h4>Site Map</h4>
         <a href="#beranda">Beranda</a>
         <a href="#panduan">Cara Kerja</a>
-        <a href="#aturan">Aturan Transaksi</a>
-        <a href="#garansi">Penjelasan Garansi</a>
         <a href="#fee">Fee Rekber</a>
         <a href="#testimoni">Testimoni</a>
         <a href="#faq">FAQ</a>
@@ -1019,8 +962,6 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
       </div>
       <div>
         <h4>Legal</h4>
-        <a href="#aturan">Terms of Service</a>
-        <a href="#garansi">Kebijakan Garansi</a>
         <a href="#faq">Pusat Bantuan</a>
       </div>
     </div>
