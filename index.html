@@ -745,7 +745,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
     <h2 class="reveal">Cara Menggunakan Rekber</h2>
     <p class="lead reveal">Pilih menu di bawah — langsung terhubung ke admin via WhatsApp. Cepat &amp; mudah.</p>
     <div class="menu-grid">
-      <a class="menu-item reveal" data-msg="Halo Admin REVI REKBER, saya mau tanya info kontak dan fee rekber" href="#">
+      <a class="menu-item reveal" data-modal="infokontak" href="#">
         <span class="mi-ic">💳</span><span class="mi-txt"><b>Info Kontak &amp; Fee</b><small>Kontak admin + daftar fee rekber</small></span><span class="mi-arr">→</span>
       </a>
       <a class="menu-item reveal d1" data-msg="Halo Admin REVI REKBER, minta list semua sosmed" href="#">
@@ -1045,6 +1045,7 @@ function wireWa(){
       el.addEventListener("click", (e)=>{
         e.preventDefault();
         if(el.dataset.modal === "rekber") openViewer("rekber");
+        if(el.dataset.modal === "infokontak") openViewer("infokontak");
         if(el.dataset.modal === "epep") openViewer("epep");
       });
     } else {
@@ -1056,6 +1057,7 @@ function wireWa(){
 /* ——— IMAGE VIEWER (layar penuh, zoom-out + geser) ——— */
 const VIEWERS = {
   rekber: ["img/cara-rekber-1.jpg","img/cara-rekber-2.jpg"],
+  infokontak: ["img/infokontak-fee.jpg"],
   epep: ["img/amaninepep1.jpeg","img/amaninepep2.jpeg","img/amaninepep3.jpeg","img/amaninepep4.jpeg","img/amaninepep5.jpeg","img/amaninepep6.jpeg","img/amaninepep7.jpeg","img/amaninepep8.jpeg","img/amaninepep9.jpeg"],
 };
 let vList = [], vIdx = 0, vTx = 0, vTy = 0, vDrag = null;
