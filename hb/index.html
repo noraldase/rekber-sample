@@ -1,119 +1,838 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>REKBER HB — Database Akun Berbahaya</title>
-  <meta name="description" content="Database akun berbahaya (HB) untuk komunitas Rekber. Cek ID game sebelum transaksi.">
-  <script>document.documentElement.dataset.theme = localStorage.getItem('rekber-theme') || 'dark';</script>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <title>REKBER HB — Jasa Rekening Bersama Terpercaya Since 2016</title>
+  <meta name="description"
+    content="REKBER HB REKBER — Layanan rekening bersama terpercaya sejak 2016. Transaksi aman, cepat, dan transparan.">
+  <meta name="keywords" content="rekber, rekening bersama, jual beli aman, Rekber HB, REKBER HB">
+  <script>
+    document.documentElement.dataset.theme = localStorage.getItem('jsn-theme') || 'dark';
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css?v=2026-06-08_v2_1">
   <link rel="icon" href="assets/img/logo.png">
+  <script src="components/header.js?v=2026-07-12_v2" defer></script>
+  <script src="components/footer.js?v=2026-07-12_v2" defer></script>
+  <script src="components/theme.js" defer></script>
+
+  <!-- SEO & Social Share -->
+  <meta name="author" content="REKBER HB REKBER">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://your-domain.com/">
+  <!-- Open Graph (Facebook, WhatsApp, Telegram) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="REKBER HB — Jasa Rekening Bersama Terpercaya Since 2016">
+  <meta property="og:description"
+    content="REKBER HB REKBER — Layanan rekening bersama terpercaya sejak 2016. Transaksi aman, cepat, dan transparan.">
+  <meta property="og:image" content="https://your-domain.com/assets/img/og-image.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1024">
+  <meta property="og:url" content="https://your-domain.com/">
+  <meta property="og:site_name" content="REKBER HB REKBER">
+  <meta property="og:locale" content="id_ID">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="REKBER HB — Jasa Rekening Bersama Terpercaya Since 2016">
+  <meta name="twitter:description"
+    content="REKBER HB REKBER — Layanan rekening bersama terpercaya sejak 2016. Transaksi aman, cepat, dan transparan.">
+  <meta name="twitter:image" content="https://your-domain.com/assets/img/og-image.png">
 </head>
+
 <body>
 
   <!-- Background Effects -->
   <div class="bg-mesh" aria-hidden="true"></div>
   <div class="noise-overlay" aria-hidden="true"></div>
 
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <div class="container nav-inner">
-      <a href="index.html" class="logo">
-        <div class="logo-mark">R</div>
-        <div>REKBER HB<small>Database Akun Berbahaya</small></div>
-      </a>
-      <div class="nav-links" id="navLinks">
-        <a href="index.html" class="active">Cek ID</a>
-        <a href="search.html">Cari</a>
-        <a href="lapor.html">Lapor</a>
-        <a href="list.html">Daftar HB</a>
-      </div>
-      <div class="nav-cta">
-        <button class="theme-toggle" id="themeToggle" title="Ganti mode">🌙</button>
-        <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
-      </div>
-    </div>
-  </nav>
+  <!-- NAVBAR (loaded from components/header.js) -->
+  <div id="header-placeholder"></div>
 
-  <!-- HERO + SEARCH -->
-  <main class="hero">
-    <div class="container">
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="particles" id="particles"></div>
+    <div class="glow-orb" aria-hidden="true"></div>
+    <div class="glow-orb" aria-hidden="true"></div>
+    <div class="glow-orb" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="hero-carousel" data-hero-carousel>
+        <div class="hero-banner is-active"><img src="assets/img/banner/jsn-banner-1.svg" alt="Banner REKBER HB 1">
+        </div>
+        <div class="hero-banner is-next"><img src="assets/img/banner/jsn-banner-2.svg?v=2026-07-17_v2" alt="Banner REKBER HB 2"
+            loading="lazy"></div>
+        <div class="hero-banner"><img src="assets/img/banner/jsn-banner-3.svg" alt="Banner REKBER HB 3" loading="lazy">
+        </div>
+        <div class="hero-banner is-prev"><img src="assets/img/banner/jsn-banner-4.svg" alt="Banner REKBER HB 4"
+            loading="lazy"></div>
+        <div class="hero-banner"><img src="assets/img/banner/jsn-banner-5.svg" alt="Banner REKBER HB 5" loading="lazy">
+        </div>
+      </div>
+
+      <div class="marquee-container">
+        <div class="marquee-text">
+          <span>Jual Beli Aman bersama Rekber HB Hubungi kami untuk Jasa Rekber</span>
+          <span class="ticker-separator" style="margin: 0 40px; color: #f5a623; font-weight: bold;">✦</span>
+          <span>Jual Beli Aman bersama Rekber HB Hubungi kami untuk Jasa Rekber</span>
+          <span class="ticker-separator" style="margin: 0 40px; color: #f5a623; font-weight: bold;">✦</span>
+          <span>Jual Beli Aman bersama Rekber HB Hubungi kami untuk Jasa Rekber</span>
+          <span class="ticker-separator" style="margin: 0 40px; color: #f5a623; font-weight: bold;">✦</span>
+        </div>
+        <div class="marquee-text" aria-hidden="true">
+          <span>Jual Beli Aman bersama Rekber HB Hubungi kami untuk Jasa Rekber</span>
+          <span class="ticker-separator" style="margin: 0 40px; color: #f5a623; font-weight: bold;">✦</span>
+          <span>Jual Beli Aman bersama Rekber HB Hubungi kami untuk Jasa Rekber</span>
+          <span class="ticker-separator" style="margin: 0 40px; color: #f5a623; font-weight: bold;">✦</span>
+          <span>Jual Beli Aman bersama Rekber HB Hubungi kami untuk Jasa Rekber</span>
+          <span class="ticker-separator" style="margin: 0 40px; color: #f5a623; font-weight: bold;">✦</span>
+        </div>
+      </div>
       <div class="hero-badge">
         <span class="dot"></span>
-        Database Aktif — <span id="count">0</span> Akun Tercatat
+        Layanan Rekber Terpercaya
       </div>
-
-      <h1>Cek ID Game<br><span class="text-gradient">Sebelum Transaksi</span></h1>
-      <p>Masukkan ID Game (tanpa server) untuk memeriksa apakah akun pernah dilaporkan sebagai HB.</p>
-
-      <form class="search-box" id="searchForm">
-        <input type="text" inputmode="numeric" name="gameId" placeholder="Masukkan ID Game (contoh: 336908795)" autocomplete="off" required>
-        <button type="submit">
-          <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-          Cari
-        </button>
-      </form>
-
-      <div class="search-result" id="searchResult" style="display:none;">
-        <!-- Result will be populated by JS -->
+      <h1>Transaksi Aman Bersama<br><span class="gradient-text cursive-name">Rekber HB</span></h1>
+      <p>Layanan rekening bersama terpercaya oleh Rekber HB. Jembatan aman antara pembeli dan penjual sejak 2016.</p>
+      <div class="hero-check-panel">
+        <span>Cek Data HB</span>
+        <h2>Cari akun berbahaya</h2>
+        <form class="hero-check-form" data-home-hb-form>
+          <input type="text" inputmode="numeric" name="gameId" placeholder="Masukkan ID Game (Tanpa Server)"
+            autocomplete="off">
+          <button type="submit" aria-label="Cari ID Game">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="m20.7 19.3-4.1-4.1a7.5 7.5 0 1 0-1.4 1.4l4.1 4.1 1.4-1.4ZM5.5 10.5a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z" />
+            </svg>
+            Cari
+          </button>
+        </form>
+        <small>Contoh: 29759698.</small>
       </div>
-
-      <!-- Quick Stats -->
-      <div class="stats">
-        <div class="stat">
-          <span class="stat-num" id="statApproved">0</span>
-          <span class="stat-label">Approved</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num pending" id="statPending">0</span>
-          <span class="stat-label">Pending</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num" id="statTotal">0</span>
-          <span class="stat-label">Total</span>
-        </div>
+      <div class="hero-buttons">
+        <a href="https://www.facebook.com/share/1AR71RVYaF/?mibextid=wwXIfr" target="_blank" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z" />
+          </svg>
+          Mulai Transaksi
+        </a>
+        <a href="#cara-kerja" class="btn btn-outline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <polygon points="10 8 16 12 10 16 10 8" />
+          </svg>
+          Pelajari Cara Kerja
+        </a>
       </div>
-    </div>
-  </main>
-
-  <!-- FEATURES -->
-  <section class="section">
-    <div class="container">
-      <h2>Cara Kerja</h2>
-      <div class="steps">
-        <div class="step">
-          <span class="num">1</span>
-          <h3>Cek ID</h3>
-          <p>Masukkan ID Game sebelum transaksi untuk cek history.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-number" id="statYears">10+</div>
+          <div class="stat-label">Tahun Pengalaman</div>
         </div>
-        <div class="step">
-          <span class="num">2</span>
-          <h3>Lapor</h3>
-          <p>Ketemu akun scam? Kirim laporan + bukti ke admin.</p>
+        <div class="stat">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Transparan</div>
         </div>
-        <div class="step">
-          <span class="num">3</span>
-          <h3>Admin Approves</h3>
-          <p>Admin verifikasi via Telegram. Approved = masuk database.</p>
-        </div>
-        <div class="step">
-          <span class="num">4</span>
-          <h3>Public Search</h3>
-          <p>ID yang approved bisa dicari siapa saja di situs ini.</p>
+        <div class="stat">
+          <div class="stat-number">0%</div>
+          <div class="stat-label">Tanpa Deposit</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <p>© <span id="year"></span> REKBER HB — Database Akun Berbahaya</p>
-      <p class="disclaimer">⚠️ Selalu verifikasi ID di situs ini sebelum transaksi. Admin tidak bertanggung jawab atas transaksi di luar rekber.</p>
-    </div>
-  </footer>
+  <!-- CARA KERJA -->
+  <section class="section" id="cara-kerja">
+    <div class="section-container">
+      <div class="section-header reveal scale-up">
+        <div class="section-label">📋 Panduan</div>
+        <h2 class="section-title">Cara Menggunakan <span class="gold-accent">Rekber</span></h2>
+        <p class="section-subtitle">Ikuti langkah-langkah mudah berikut untuk bertransaksi dengan aman melalui <span
+            class="gold-accent">REKBER HB</span></p>
+      </div>
+      <div class="how-grid">
+        <!-- Step 1 -->
+        <div class="how-step reveal scale-up">
+          <div class="how-icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </div>
+          <div class="how-content">
+            <h3>Kesepakatan Bersama</h3>
+            <p>Pembeli & penjual sepakat menggunakan Rekber HB Rekber.</p>
+          </div>
+        </div>
 
-  <script src="assets/js/config.js"></script>
-  <script src="assets/js/app.js"></script>
+        <!-- Step 2 -->
+        <div class="how-step reveal scale-up" style="transition-delay: 0.1s;">
+          <div class="how-icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+            </svg>
+          </div>
+          <div class="how-content">
+            <h3>Buat Group</h3>
+            <p>Membuat grup chat transaksi bersama admin di Messenger.</p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="how-step reveal scale-up" style="transition-delay: 0.2s;">
+          <div class="how-icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+              <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+              <path d="M10 9H8" />
+              <path d="M16 13H8" />
+              <path d="M16 17H8" />
+            </svg>
+          </div>
+          <div class="how-content">
+            <h3>Isi Formulir</h3>
+            <p>Lengkapi data transaksi pada formulir yang disediakan.</p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="how-step reveal scale-up" style="transition-delay: 0.3s;">
+          <div class="how-icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="12" x="2" y="6" rx="2" />
+              <circle cx="12" cy="12" r="2" />
+              <path d="M6 12h.01M18 12h.01" />
+            </svg>
+          </div>
+          <div class="how-content">
+            <h3>Transfer Dana</h3>
+            <p>Pembeli mentransfer dana + fee rekber kepada Admin.</p>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="how-step reveal scale-up" style="transition-delay: 0.4s;">
+          <div class="how-icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m7.5 4.27 9 5.15" />
+              <path
+                d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+              <path d="m3.3 7 8.7 5 8.7-5" />
+              <path d="M12 22V12" />
+            </svg>
+          </div>
+          <div class="how-content">
+            <h3>Kirim Barang</h3>
+            <p>Penjual mengirimkan akun/barang langsung ke Pembeli.</p>
+          </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="how-step reveal scale-up" style="transition-delay: 0.5s;">
+          <div class="how-icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <path d="m9 12 2 2 4-4" />
+            </svg>
+          </div>
+          <div class="how-content">
+            <h3>Konfirmasi DONE</h3>
+            <p>Pembeli mengamankan data dan konfirmasi DONE di grup.</p>
+          </div>
+        </div>
+
+        <!-- Step 7 -->
+        <div class="how-step reveal scale-up" style="transition-delay: 0.6s;">
+          <div class="how-icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2-1 4-2 7-2 2.94 0 5.06 1.05 7 2a1 1 0 0 1 1 1v7z" />
+              <path d="m9 12 2 2 4-4" />
+            </svg>
+          </div>
+          <div class="how-content">
+            <h3>Pencairan Dana</h3>
+            <p>Admin meneruskan dana kepada penjual tanpa deposit apapun.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATURAN / TOS -->
+  <section class="section" id="aturan" style="background:rgba(0,0,0,0.2);">
+    <div class="section-container">
+      <div class="section-header reveal scale-up">
+        <div class="section-label">⚖️ Terms of Service</div>
+        <h2 class="section-title">Aturan Sebelum Transaksi</h2>
+        <p class="section-subtitle">Harap baca dan pahami seluruh aturan berikut sebelum memulai transaksi</p>
+      </div>
+      <div class="tos-grid">
+        <div class="tos-item reveal from-left">
+          <div class="tos-num">1</div>
+          <div class="tos-text">Pembeli/Penjual <strong>dilarang mengubah judul group</strong> transaksi.</div>
+        </div>
+        <div class="tos-item reveal from-right">
+          <div class="tos-num">2</div>
+          <div class="tos-text">Dilarang melakukan transaksi fiktif/ilegal. Jika ditemukan, <strong>dana akan
+              disumbangkan ke badan amal</strong> yang ditentukan admin.</div>
+        </div>
+        <div class="tos-item reveal from-left">
+          <div class="tos-num">3</div>
+          <div class="tos-text">Apabila transaksi cancel, pembeli <strong>dilarang mengeluarkan penjual sepihak</strong>
+            tanpa persetujuan admin.</div>
+        </div>
+        <div class="tos-item reveal from-right">
+          <div class="tos-num">4</div>
+          <div class="tos-text">Apabila transaksi cancel & pembeli ingin mencari penjual lain — <strong>tidak dikenakan
+              fee lagi</strong> apabila nominalnya sama.</div>
+        </div>
+        <div class="tos-item reveal from-left">
+          <div class="tos-num">5</div>
+          <div class="tos-text">Apabila transaksi cancel & pembeli ingin melakukan refund dana — <strong>fee
+              terpotong</strong>.</div>
+        </div>
+        <div class="tos-item reveal from-right">
+          <div class="tos-num">6</div>
+          <div class="tos-text">Apabila transaksi bersifat <strong>bergaransi</strong>, penjual dan pembeli
+            <strong>dilarang meninggalkan group</strong> transaksi ketika selesai.
+          </div>
+        </div>
+        <div class="tos-item reveal from-left">
+          <div class="tos-num">7</div>
+          <div class="tos-text">Pembeli diberikan waktu <strong>3 jam</strong> untuk mengecek & mengamankan akun
+            (terhitung saat penjual memberikan data). Jika tidak ada konfirmasi selama 3 jam, admin berhak mencairkan
+            dana kepada penjual (dengan syarat penjual mengirim identitas).</div>
+        </div>
+        <div class="tos-item reveal from-right">
+          <div class="tos-num">8</div>
+          <div class="tos-text">Apabila penjual tidak mengirim data/barang selama <strong>1 jam</strong> (terhitung dari
+            konfirmasi dana masuk), admin berhak membebaskan pembeli untuk mencari penjual lain atau melakukan refund.
+          </div>
+        </div>
+        <div class="tos-item reveal from-left">
+          <div class="tos-num">9</div>
+          <div class="tos-text">Transaksi <strong>GARANSI</strong>: Jika penjual lari dari tanggung jawab saat akun
+            bermasalah, admin akan mengirimkan identitas penjual kepada pembeli sesuai perjanjian.</div>
+        </div>
+        <div class="tos-item reveal from-right">
+          <div class="tos-num">10</div>
+          <div class="tos-text">Apabila ada perdebatan/drama saat transaksi, admin akan meminta <strong>identitas
+              pembeli dan penjual</strong> untuk keamanan & kenyamanan bersama.</div>
+        </div>
+        <div class="tos-item reveal from-left">
+          <div class="tos-num">11</div>
+          <div class="tos-text">Transaksi barang: Pembeli <strong>wajib melakukan video unboxing</strong> setelah barang
+            diterima agar bisa claim refund jika barang tidak sesuai.</div>
+        </div>
+        <div class="tos-item reveal from-right">
+          <div class="tos-num">12</div>
+          <div class="tos-text">Apabila barang/akun tidak sesuai, pembeli berhak <strong>membatalkan transaksi</strong>
+            atau <strong>negosiasi harga</strong> dengan penjual.</div>
+        </div>
+      </div>
+
+      <!-- WARNING BANNER -->
+      <div class="warning-banner reveal scale-up">
+        <div style="margin: 12px 0; text-align: center;">
+          <img src="assets/img/wa-identitas.jpg"
+            alt="Nomor WA Resmi Rekber HB - 085236334645 - Nomor Khusus Pengamanan Identitas Transaksi Garansi"
+            style="width: 100%; max-width: 300px; border-radius: 12px; border: 1px solid rgba(37, 211, 102, 0.25); box-shadow: 0 8px 32px rgba(0,0,0,0.3); cursor: pointer; display: block; margin: 0 auto;"
+            class="fee-image" loading="lazy">
+        </div>
+        <p>Jika ada nomor lain yang mengaku menjadi Rekber HB atau mengaku menjadi suaminya (Nico Martan) untuk meminta
+          data akun ML penjual — <strong>Itu Penipuan / ulah OKNUM pembeli yang mau menipu penjual</strong>. Segera
+          laporkan ke Group Transaksi agar kami blacklist!</p>
+      </div>
+
+      <!-- PLATFORM INFO -->
+      <div class="warning-banner reveal scale-up"
+        style="border-color:rgba(59,130,246,0.25); background:linear-gradient(135deg,rgba(59,130,246,0.08),rgba(59,130,246,0.02)); margin-top:20px;">
+        <div class="warning-icon">ℹ️</div>
+        <h3 style="color:var(--accent-blue);">Platform Resmi</h3>
+        <p>Transaksi Rekber <strong>hanya di Facebook</strong>, tidak ada platform lainnya. WhatsApp hanya digunakan
+          untuk mengamankan identitas penjual yang bertransaksi <strong>GARANSI</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PENJELASAN GARANSI -->
+  <section class="section" id="garansi">
+    <div class="section-container">
+      <div class="section-header reveal scale-up">
+        <div class="section-label"><img src="assets/img/garansi.png" alt=""
+            style="height:18px;width:auto;vertical-align:middle;"> Warranty Info</div>
+        <h2 class="section-title">Penjelasan Garansi</h2>
+        <p class="section-subtitle">Pahami jenis-jenis garansi yang berlaku dalam setiap transaksi di REKBER HB</p>
+      </div>
+
+      <div class="garansi-grid">
+        <div class="garansi-card reveal from-left">
+          <div class="garansi-header">
+            <div class="garansi-badge badge-refull">REFULL</div>
+            <div class="garansi-tagline">Garansi Penuh - Berlaku ke Pembeli Seterusnya</div>
+          </div>
+          <div class="garansi-body">
+            <p>REFULL adalah penjual menggaransikan akun yang dijual <strong>sepenuhnya kepada pembeli</strong>. Apabila
+              akun tersebut bermasalah misalnya:</p>
+            <div class="garansi-issues"><span class="issue-tag">keHackback</span><span
+                class="issue-tag">Nabrak</span><span class="issue-tag">Kebanned</span></div>
+            <p>Maka Penjual <strong>WAJIB BERTANGGUNG JAWAB</strong> dalam bentuk pengembalian <strong>DANA</strong>
+              sesuai nominal transaksi.</p>
+            <div class="garansi-note note-green garansi-note-inline"><svg width="16" height="16" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+              </svg><span>Garansi ini berlaku ke pembeli <strong>seterusnya</strong>.</span></div>
+          </div>
+        </div>
+
+        <div class="garansi-card reveal from-right">
+          <div class="garansi-header">
+            <div class="garansi-badge badge-reffplayer">REFF PLAYER</div>
+            <div class="garansi-tagline">Garansi Hanya ke Pembeli Pertama</div>
+          </div>
+          <div class="garansi-body">
+            <p>REFF PLAYER adalah penjual menggaransikan akun yang dijual hanya ke <strong>pembeli pertama.</strong>.
+              Apabila akun tersebut bermasalah misalnya:</p>
+            <div class="garansi-issues"><span class="issue-tag">keHackback</span><span
+                class="issue-tag">Nabrak</span><span class="issue-tag">Kebanned</span></div>
+            <p>Maka Penjual <strong>Wajib Bertanggung Jawab</strong> dalam bentuk pengembalian <strong>DANA</strong>
+              sesuai nominal transaksi.</p>
+            <div class="garansi-note note-red"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="15" y1="9" x2="9" y2="15" />
+                <line x1="9" y1="9" x2="15" y2="15" />
+              </svg>Garansi ini tidak berlaku lagi, apabila:</div>
+            <ul class="garansi-list">
+              <li>Akun dijual kepembeli ke dua / seterusnya</li>
+              <li>Email Moonton diubah setelah transaksi DONE</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="garansi-card reveal from-left">
+          <div class="garansi-header">
+            <div class="garansi-badge badge-reffbuyer">REFF PLAYER BUYER</div>
+            <div class="garansi-tagline">Garansi Sampai Pembeli ke-2</div>
+          </div>
+          <div class="garansi-body">
+            <p>Penjual menggaransikan akunya <strong>sampai ke pembeli ke-2</strong>. Apabila dikemudian hari akun
+              mengalami:</p>
+            <div class="garansi-issues"><span class="issue-tag">Nabrak</span><span
+                class="issue-tag">Kebanned</span><span class="issue-tag">Kebegal</span></div>
+            <p>Maka Penjual <strong>WAJIB BERTANGGUNG JAWAB</strong> dalam bentuk pengembalian <strong>DANA</strong>
+              sesuai nominal transaksi.</p>
+            <div class="garansi-note note-red"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="15" y1="9" x2="9" y2="15" />
+                <line x1="9" y1="9" x2="15" y2="15" />
+              </svg>Garansi ini tidak berlaku lagi, apabila:</div>
+            <ul class="garansi-list">
+              <li>Email monton diubah setelah transaksi DONE</li>
+              <li>Akun dijual ke pembeli ke-3 atau seterusnya</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="garansi-card reveal from-right">
+          <div class="garansi-header">
+            <div class="garansi-badge badge-refullhb">REFULL HB</div>
+            <div class="garansi-tagline">Garansi HB Only Tidak Terbatas</div>
+          </div>
+          <div class="garansi-body">
+            <p>Penjual menggaransikan akunya <strong>sampai ke pembeli seterusnya (Tidak Terbatas)</strong> dan Garansi
+              ini <strong>Khusus HB ONLY</strong>.</p>
+            <div class="garansi-note note-red"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="15" y1="9" x2="9" y2="15" />
+                <line x1="9" y1="9" x2="15" y2="15" />
+              </svg>Garansi ini tidak berlaku lagi, apabila:</div>
+            <ul class="garansi-list">
+              <li>Akun Nabrak / Keban, Akun kebegal moonton</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="garansi-card reveal from-left">
+          <div class="garansi-header">
+            <div class="garansi-badge badge-reffhb">REFF PLAYER HB</div>
+            <div class="garansi-tagline">Garansi HB Only ke Pembeli Pertama</div>
+          </div>
+          <div class="garansi-body">
+            <p>Penjual menggaransikan akunya <strong>hanya ke pembeli pertama</strong> &amp; Garansi ini <strong>Khusus
+                HB Only</strong>.</p>
+            <div class="garansi-note note-red"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="15" y1="9" x2="9" y2="15" />
+                <line x1="9" y1="9" x2="15" y2="15" />
+              </svg>Garansi ini tidak berlaku lagi, apabila:</div>
+            <ul class="garansi-list">
+              <li>Email monton diubah setelah transaksi DONE</li>
+              <li>Akun dijual ke pembeli ke-2</li>
+              <li>Akun Nabrak / keban, Akun kebegal moonton</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="garansi-card reveal from-right">
+          <div class="garansi-header">
+            <div class="garansi-badge badge-reffbuyerhb">REFF PLAYER HB ke Buyer 1x</div>
+            <div class="garansi-tagline">Garansi HB Only Sampai Pembeli ke-2</div>
+          </div>
+          <div class="garansi-body">
+            <p>Penjual menggaransikan akunya <strong>sampai ke pembeli ke-2</strong> &amp; Garansi ini <strong>Khusus HB
+                Only</strong>.</p>
+            <div class="garansi-note note-red"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="15" y1="9" x2="9" y2="15" />
+                <line x1="9" y1="9" x2="15" y2="15" />
+              </svg>Garansi ini tidak berlaku lagi, apabila:</div>
+            <ul class="garansi-list">
+              <li>Email monton diubah setelah transaksi DONE</li>
+              <li>Akun dijual ke pembeli ke-3 atau seterusnya</li>
+              <li>Akun Nabrak / keban, Akun kebegal moonton</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="garansi-card reveal from-left" style="grid-column: 1 / -1;">
+          <div class="garansi-body">
+            <div class="garansi-note note-blue garansi-note-inline"><svg width="16" height="16" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg><span>Semua Garansi diatas masih berlaku jika ada <strong>kesepakatan lain</strong> antara penjual
+                &amp; pembeli secara pribadi.</span></div>
+          </div>
+        </div>
+
+        <div class="garansi-card garansi-noreff reveal from-right">
+          <div class="garansi-header">
+            <div class="garansi-badge badge-noreff">NOREFF</div>
+            <div class="garansi-tagline">Tanpa Garansi</div>
+          </div>
+          <div class="garansi-body">
+            <p>Penjual <strong>tidak menggaransikan</strong> akun yang dijual. Jika akun bermasalah setelah transaksi
+              selesai, maka <strong>diluar tanggung jawab penjual</strong>.</p>
+          </div>
+        </div>
+
+        <div class="garansi-card reveal from-left" style="grid-column: 1 / -1;">
+          <div class="garansi-body" style="padding: 8px 0;">
+            <div style="text-align: center; margin-bottom: 18px;">
+              <span class="garansi-badge"
+                style="background: rgba(245, 166, 35, 0.15); color: #f5a623; border: 1px solid rgba(245, 166, 35, 0.3); font-size: 11px; letter-spacing: 1px; padding: 4px 12px; border-radius: 50px; font-weight: 700; font-family: 'JetBrains Mono', monospace; text-transform: uppercase;">⚡
+                KETENTUAN GARANSI BARU</span>
+            </div>
+            <div style="margin-bottom: 16px; text-align: center;">
+              <img src="assets/img/reffplayer-ce-email-admin.jpeg"
+                alt="Bukti GARANSI berlaku untuk REFF PLAYER HB, REFF PLAYER BUYER, REFF PLAYER BUYER HB"
+                style="width: 100%; max-width: 300px; border-radius: 12px; border: 1px solid rgba(45, 122, 255, 0.25); box-shadow: 0 8px 32px rgba(0,0,0,0.3); cursor: pointer; display: block; margin: 0 auto;"
+                class="fee-image" loading="lazy">
+            </div>
+
+            <div class="garansi-card-caption">
+              <span
+                style="color: #fbbf24 !important; font-weight: 600; display: block; margin-bottom: 8px; line-height: 1.6;">
+                Untuk Menggunakan Garansi ini Penjual/Pembeli bisa tulis di formulir Transaksi “<strong
+                  style="color: #fbbf24 !important; font-weight: 800;">REFF PLAYER CE EMAIL ADMIN</strong>“
+              </span>
+              <span>GARANSI diatas bisa Berlaku juga untuk <strong>REFF PLAYER HB</strong> , <strong>REFF PLAYER
+                  BUYER</strong> , <strong>REFF PLAYER BUYER HB</strong></span>
+            </div>
+            <div style="margin-top: 18px; text-align: center;">
+              <img src="assets/img/POSTER_PERTANYAAN_YANG_PALING_SERING_DI_TANYAKAN_NICO_JULIE_SEAN.jpg"
+                alt="Pertanyaan Yang Paling Sering Ditanyakan Nico Rekber HB"
+                style="width: 100%; max-width: 300px; border-radius: 12px; border: 1px solid rgba(45, 122, 255, 0.25); box-shadow: 0 8px 32px rgba(0,0,0,0.3); cursor: pointer; display: block; margin: 0 auto;"
+                class="fee-image" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sanksi-banner reveal scale-up">
+        <div class="sanksi-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+            <path d="M9 12l2 2 4-5" />
+          </svg></div>
+        <h3>SANKSI - Apabila Penjual Tidak Bertanggung Jawab</h3>
+        <p>Pihak Admin akan mengirim identitas kepembeli &amp; pembeli dibebaskan untuk mempubilkasikan identitas
+          penjual sampai permasalahan selesai , kesepakatan ini telah disetujui oleh semua pihak sebelum transaksi
+          dimulai</p>
+      </div>
+
+    </div>
+  </section>
+  <!-- FEE REKBER -->
+  <section class="section" id="fee">
+    <div class="section-container">
+      <div class="section-header reveal scale-up">
+        <div class="section-label">💰 Biaya Layanan</div>
+        <h2 class="section-title">List Fee Rekber</h2>
+      </div>
+
+      <div class="fee-wrapper reveal from-left">
+        <div class="fee-board">
+          <div class="fee-image-container">
+            <img src="assets/img/list-fee.jpg" alt="List Fee Rekber" class="fee-image" loading="lazy">
+          </div>
+        </div>
+
+        <div class="fee-explanation-card">
+          <h3>Penjelasan Fee</h3>
+          <p>Apabila transaksi dibatalkan, biaya layanan (fee) <strong>tetap berlaku</strong> jika pembeli melanjutkan
+            transaksi dengan penjual lain. Namun, apabila pembeli membatalkan transaksi dan mengajukan pengembalian dana
+            (refund), maka biaya layanan (fee) <strong>tidak dapat dikembalikan</strong>.</p>
+          <div class="fee-alert">
+            <span>“Transaksi yang menggunakan <strong>GARANSI</strong> akan dikenakan biaya tambahan sebesar
+              <strong>Rp10.000</strong>.”</span>
+          </div>
+
+        </div>
+        <!-- Payment marquee inside fee card -->
+        <div class="fee-payment-strip">
+          <p class="fee-payment-label">Kami menerima pembayaran melalui:</p>
+          <div class="payment-scroll-wrapper">
+            <div class="payment-scroll-track" data-payment-scroll>
+              <span class="pay-badge" title="QRIS"><img src="assets/img/payment/qris.svg" alt="QRIS"></span>
+              <span class="pay-badge" title="BCA"><img src="assets/img/payment/bca.svg" alt="BCA"></span>
+              <span class="pay-badge" title="BRI"><img src="assets/img/payment/bri.svg" alt="BRI"></span>
+              <span class="pay-badge" title="BNI"><img src="assets/img/payment/bni.svg" alt="BNI"></span>
+              <span class="pay-badge" title="Mandiri"><img src="assets/img/payment/mandiri.svg" alt="Mandiri"></span>
+              <span class="pay-badge" title="SeaBank"><img src="assets/img/payment/seabank.svg" alt="SeaBank"></span>
+              <span class="pay-badge" title="Superbank"><img src="assets/img/payment/superbank.svg"
+                  alt="Superbank"></span>
+              <span class="pay-badge" title="Bank Jago"><img src="assets/img/payment/bank-jago.svg"
+                  alt="Bank Jago"></span>
+              <span class="pay-badge" title="Krom Bank"><img src="assets/img/payment/krom-bank.png"
+                  alt="Krom Bank"></span>
+              <span class="pay-badge" title="DANA"><img src="assets/img/payment/dana.svg" alt="DANA"></span>
+              <span class="pay-badge" title="OVO"><img src="assets/img/payment/ovo.svg" alt="OVO"></span>
+              <span class="pay-badge" title="ShopeePay"><img src="assets/img/payment/shopeepay.svg"
+                  alt="ShopeePay"></span>
+              <!-- Duplicate for seamless loop -->
+              <span class="pay-badge" title="QRIS" aria-hidden="true"><img src="assets/img/payment/qris.svg"
+                  alt=""></span>
+              <span class="pay-badge" title="BCA" aria-hidden="true"><img src="assets/img/payment/bca.svg"
+                  alt=""></span>
+              <span class="pay-badge" title="BRI" aria-hidden="true"><img src="assets/img/payment/bri.svg"
+                  alt=""></span>
+              <span class="pay-badge" title="BNI" aria-hidden="true"><img src="assets/img/payment/bni.svg"
+                  alt=""></span>
+              <span class="pay-badge" title="Mandiri" aria-hidden="true"><img src="assets/img/payment/mandiri.svg"
+                  alt=""></span>
+              <span class="pay-badge" title="SeaBank" aria-hidden="true"><img src="assets/img/payment/seabank.svg"
+                  alt=""></span>
+              <span class="pay-badge" title="Superbank" aria-hidden="true"><img src="assets/img/payment/superbank.svg"
+                  alt=""></span>
+              <span class="pay-badge" title="Bank Jago" aria-hidden="true"><img src="assets/img/payment/bank-jago.svg"
+                  alt=""></span>
+              <span class="pay-badge" title="Krom Bank" aria-hidden="true"><img src="assets/img/payment/krom-bank.png"
+                  alt=""></span>
+              <span class="pay-badge" title="DANA" aria-hidden="true"><img src="assets/img/payment/dana.svg"
+                  alt=""></span>
+              <span class="pay-badge" title="OVO" aria-hidden="true"><img src="assets/img/payment/ovo.svg"
+                  alt=""></span>
+              <span class="pay-badge" title="ShopeePay" aria-hidden="true"><img src="assets/img/payment/shopeepay.svg"
+                  alt=""></span>
+            </div>
+          </div>
+        </div>
+      </div><!-- /fee-wrapper -->
+    </div>
+  </section>
+
+  <!-- KONTAK + PAYMENT WRAPPER -->
+  <div class="kontak-payment-wrap">
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="section-container">
+        <div class="section-header reveal">
+          <div class="section-label">❓ Pertanyaan Umum</div>
+          <h2 class="section-title">FAQ REKBER HB</h2>
+          <p class="section-subtitle">Beberapa pertanyaan yang paling sering ditanyakan oleh pelanggan kami</p>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span class="faq-num">01</span>
+              <span class="faq-question-text">Setelah transaksi done apakah ada biaya tambahan?</span>
+              <span class="faq-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-answer" aria-hidden="true">
+              <div class="faq-answer-content">
+                <p>Engga ada, pihak admin akan mengirimkan dana kepada penjual sesuai nominal transaksi tanpa biaya
+                  tambahan apapun.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span class="faq-num">02</span>
+              <span class="faq-question-text">Transaksi apa saja yang engga diterima?</span>
+              <span class="faq-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-answer" aria-hidden="true">
+              <div class="faq-answer-content">
+                <p>Kami tidak menerima transaksi Jual Beli Instagram, rekening / E-wallet, Tinder, Chip, dan akun Domino
+                  (yang berbau perjudian).</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span class="faq-num">03</span>
+              <span class="faq-question-text">Apa bisa Transaksi Rekber di WhatsApp?</span>
+              <span class="faq-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-answer" aria-hidden="true">
+              <div class="faq-answer-content">
+                <p>Mohon maaf untuk saat ini kita hanya melayani transaksi melalui Facebook saja. WhatsApp kami gunakan
+                  hanya untuk pengamanan identitas yang bertransaksi menggunakan <strong>GARANSI</strong>. Jadi kalau
+                  kalian menemukan transaksi Rekber di platform lain, hati-hati karena itu bukan kami.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span class="faq-num">04</span>
+              <span class="faq-question-text">Metode pembayaran apa saja yang tersedia?</span>
+              <span class="faq-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-answer" aria-hidden="true">
+              <div class="faq-answer-content">
+                <p>Kami menerima pembayaran via QRIS, DANA, OVO, ShopeePay, dan Bank yang tersedia di Indonesia.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span class="faq-num">05</span>
+              <span class="faq-question-text">Pembeli minta cancel karena alasan BU / mau ganti penjual lain apa
+                bisa?</span>
+              <span class="faq-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-answer" aria-hidden="true">
+              <div class="faq-answer-content">
+                <p>Mohon maaf untuk itu kita tidak bisa, karena membuat grup bersama admin dianggap kesepakatan
+                  transaksi. Kecuali jika barang/akun yang dibeli tidak sesuai, maka pihak admin akan melakukan
+                  crosscheck antara pembeli & penjual. Jika terbukti ada ketidaksesuaian, pembeli diperbolehkan
+                  membatalkan transaksi.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KONTAK -->
+    <section class="section" id="kontak">
+      <div class="section-container">
+        <div class="section-header reveal">
+          <div class="section-label">📞 Hubungi Kami</div>
+          <h2 class="section-title">Kontak REKBER HB</h2>
+          <p class="section-subtitle">
+            Hubungi kami melalui platform resmi di bawah ini<br>
+            <span class="operating-days">📅 Buka Setiap Hari (kecuali Jumat Libur)</span><br>
+            <span class="operating-hours">🕛 Jam Kerja 07.30 - 00.30 WIB</span>
+          </p>
+        </div>
+        <div class="contact-cards">
+          <div class="contact-card reveal">
+            <div class="contact-icon fb">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z" />
+              </svg>
+            </div>
+            <h3>Facebook</h3>
+            <p>Platform utama transaksi rekber</p>
+            <a href="https://www.facebook.com/share/1AR71RVYaF/?mibextid=wwXIfr" target="_blank"
+              class="contact-link fb-link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              Profil Rekber HB
+            </a>
+          </div>
+
+          <div class="contact-card reveal">
+            <div class="contact-icon tt">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46 6.28 6.28 0 001.87-4.48V8.73a8.24 8.24 0 004.84 1.56v-3.4a4.85 4.85 0 01-1.13-.2z" />
+              </svg>
+            </div>
+            <h3>TikTok</h3>
+            <p>Follow untuk info terbaru</p>
+            <a href="https://www.tiktok.com/@rekberhb" target="_blank" class="contact-link tt-link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              @rekberhb
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /kontak-payment-wrap -->
+
+  <!-- FOOTER + WIDGETS (loaded from components/footer.js) -->
+  <div id="footer-placeholder"></div>
+
+  <script src="assets/js/script.js?v=2026-06-08_v1"></script>
+
 </body>
+
 </html>

@@ -1,89 +1,82 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cari ID HB — REKBER HB</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-  <script>document.documentElement.dataset.theme = localStorage.getItem('rekber-theme')||'dark';</script>
-  <style>
-    .search-page{max-width:640px;margin:0 auto;padding:60px 24px}
-    .search-page h1{font-size:30px;font-weight:800;text-align:center;margin-bottom:6px}
-    .search-page > p{text-align:center;color:var(--muted);font-size:15px;margin-bottom:28px}
-    .hb-search-form{display:flex;gap:10px;margin-bottom:24px}
-    .hb-search-form input{flex:1;background:var(--card);border:1px solid var(--line);color:var(--ink);font-family:inherit;font-size:16px;font-weight:600;padding:16px 20px;border-radius:14px;outline:none}
-    .hb-search-form input:focus{border-color:var(--blue)}
-    .hb-search-form button{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#2d7aff,#5b9aff);color:#fff;font-weight:700;padding:16px 28px;border:none;border-radius:14px;cursor:pointer}
-    @media(max-width:480px){.hb-search-form{flex-direction:column}.hb-search-form button{justify-content:center}}
-  </style>
-</head>
-<body>
-  <nav class="navbar">
-    <div class="container nav-inner">
-      <a href="index.html" class="logo"><div class="logo-mark">R</div><div>REKBER HB<small>Database Akun Berbahaya</small></div></a>
-      <div class="nav-links" id="navLinks">
-        <a href="index.html">Cek ID</a>
-        <a href="search.html" class="active">Cari</a>
-        <a href="lapor.html">Lapor</a>
-        <a href="list.html">Daftar HB</a>
-      </div>
-      <div class="nav-cta">
-        <button class="theme-toggle" id="themeToggle">🌙</button>
-        <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
-      </div>
-    </div>
-  </nav>
-
-  <main class="search-page">
-    <h1>Cari ID Game</h1>
-    <p>Masukkan ID Game (tanpa server) untuk cek apakah akun tercatat HB.</p>
-    <form class="hb-search-form" id="searchForm">
-      <input type="text" inputmode="numeric" name="gameId" placeholder="Contoh: 336908795" autocomplete="off" required>
-      <button type="submit">🔍 Cari</button>
-    </form>
-    <div id="result"></div>
-  </main>
-
-  <script src="assets/js/config.js"></script>
+  <title>Cari ID HB - REKBER HB REKBER</title>
+  <meta name="description" content="Cari ID Game akun hasil HB REKBER HB.">
   <script>
-    function escapeHtml(str){if(str==null)return '';return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
-    const box = document.getElementById('result');
-    document.getElementById('searchForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const id = e.target.gameId.value.replace(/\D/g,'');
-      if(!id) return;
-      box.className = 'search-result show';
-      box.innerHTML = '<div class="loading"><span class="dot"></span> Mencari...</div>';
-      try {
-        const res = await fetch(`${window.API_BASE}/api/hb/search?id=${encodeURIComponent(id)}`);
-        const json = await res.json();
-        if (json.ok && json.found && json.data) {
-          const r = json.data;
-          box.className = 'search-result show found';
-          box.innerHTML = `
-            <div class="result-header"><span class="status-badge danger">⚠️ AKUN BERBAHAYA</span></div>
-            <div class="result-body">
-              ${r.image_path ? `<img src="${window.API_BASE}/uploads/${r.image_path}" alt="">` : ''}
-              <div class="result-info">
-                <h3>${escapeHtml(r.id_game)} (${escapeHtml(r.server)})</h3>
-                <p><strong>Pelaku:</strong> ${escapeHtml(r.offender_name)}</p>
-                <p><strong>Tanggal HB:</strong> ${r.hb_date || '-'}</p>
-                <p><strong>Dilapor oleh:</strong> ${escapeHtml(r.reporter_fb)}</p>
-                ${r.approved_by ? `<p class="approved">✓ Approved by ${escapeHtml(r.approved_by)}</p>` : ''}
-              </div>
-            </div>
-            <a href="view.html?id=${encodeURIComponent(r.id_game)}" class="btn-detail">Lihat Detail →</a>`;
-        } else {
-          box.className = 'search-result show clean';
-          box.innerHTML = `<div class="result-header"><span class="status-badge safe">✅ ID Bersih</span></div>
-            <p>ID <strong>${escapeHtml(id)}</strong> tidak terdaftar dalam database akun HB.</p>
-            <p class="hint">Tetap hati-hati dan gunakan jasa rekber untuk transaksi.</p>`;
-        }
-      } catch (err) {
-        box.className = 'search-result show error';
-        box.innerHTML = `<p>Gagal menghubungi server: ${escapeHtml(err.message)}</p>`;
-      }
-    });
+    document.documentElement.dataset.theme = localStorage.getItem('jsn-theme') || 'dark';
   </script>
+  <link rel="icon" href="assets/img/logo.png">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="components/header.js?v=2026-07-07_v2" defer></script>
+  <script src="components/footer.js?v=2026-07-07_v2" defer></script>
+  <script src="components/theme.js" defer></script>
+
+  <!-- SEO & Social Share -->
+  <meta name="author" content="REKBER HB REKBER">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://your-domain.com/search.html">
+  <!-- Open Graph (Facebook, WhatsApp, Telegram) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Cari ID HB - REKBER HB REKBER">
+  <meta property="og:description" content="Cari ID Game akun hasil HB REKBER HB.">
+  <meta property="og:image" content="https://your-domain.com/assets/img/og-image.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1024">
+  <meta property="og:url" content="https://your-domain.com/search.html">
+  <meta property="og:site_name" content="REKBER HB REKBER">
+  <meta property="og:locale" content="id_ID">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cari ID HB - REKBER HB REKBER">
+  <meta name="twitter:description" content="Cari ID Game akun hasil HB REKBER HB.">
+  <meta name="twitter:image" content="https://your-domain.com/assets/img/og-image.png">
+</head>
+
+<body class="search-page">
+  <div class="bg-mesh" aria-hidden="true"></div>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <!-- NAVBAR (loaded from components/header.html) -->
+  <div id="header-placeholder"></div>
+  <main class="hb-search">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="particles" id="particles"></div>
+    <section class="hb-search-box">
+      <div class="hb-status"><span class="dot"></span> CEK DATA HB</div>
+      <h1>Cari ID Game</h1>
+      <p>Masukkan ID Game (Tanpa Server) untuk mengecek apakah akun tercatat dalam data HB REKBER HB.</p>
+      <form class="hb-search-form" data-search-form>
+        <input type="text" inputmode="numeric" name="gameId" placeholder="Masukkan ID Game (Tanpa Server)"
+          autocomplete="off">
+        <button type="submit" aria-label="Cari ID Game">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="m20.7 19.3-4.1-4.1a7.5 7.5 0 1 0-1.4 1.4l4.1 4.1 1.4-1.4ZM5.5 10.5a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z" />
+          </svg>
+          Cari
+        </button>
+      </form>
+      <div class="hb-search-result" data-search-result></div>
+      <section class="hb-directory">
+        <div class="hb-directory-head">
+          <h2>Daftar akun Berbahaya</h2>
+          <span data-hb-count></span>
+        </div>
+        <div class="hb-directory-list" data-hb-list></div>
+        <div class="hb-directory-pages" data-hb-pagination></div>
+      </section>
+    </section>
+  </main>
+  <!-- FOOTER + WIDGETS (loaded from components/footer.html) -->
+  <div id="footer-placeholder"></div>
+
+  <script src="assets/js/script.js"></script>
+  <script src="assets/js/hb-data.js"></script>
+
 </body>
+
 </html>

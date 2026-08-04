@@ -1,185 +1,95 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lapor Akun HB — REKBER HB</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-  <script>document.documentElement.dataset.theme = localStorage.getItem('rekber-theme')||'dark';</script>
-  <style>
-    .report-shell{max-width:640px;margin:0 auto;padding:80px 24px}
-    .report-intro{text-align:center;margin-bottom:36px}
-    .report-intro .badge{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);background:rgba(255,71,87,.12);border:1px solid rgba(255,71,87,.3);padding:6px 14px;border-radius:100px;margin-bottom:16px}
-    .report-intro .badge .dot{width:7px;height:7px;border-radius:50%;background:var(--red)}
-    .report-intro h1{font-size:32px;font-weight:800;margin-bottom:8px}
-    .report-intro p{color:var(--muted);font-size:15px}
-    .report-form{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:32px}
-    .report-upload{display:block;border:2px dashed var(--line);border-radius:16px;padding:32px;text-align:center;cursor:pointer;margin-bottom:24px;transition:border .2s;position:relative}
-    .report-upload:hover{border-color:var(--blue)}
-    .report-upload span{display:block;font-size:14px;font-weight:700;margin-bottom:4px}
-    .report-upload small{color:var(--muted);display:block;margin-top:6px}
-    .report-upload input{position:absolute;inset:0;opacity:0;cursor:pointer}
-    .report-upload img{display:none;max-width:120px;border-radius:12px;margin:10px auto 0}
-    .report-upload.has-photo img{display:block}
-    .report-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
-    .report-grid label, .report-form label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
-    .report-grid input, .report-form input, .report-form textarea, .report-form select{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--ink);font-family:inherit;font-size:15px;font-weight:600;padding:14px 16px;border-radius:12px;outline:none;transition:border .2s}
-    .report-grid input:focus{border-color:var(--blue)}
-    .full{grid-column:1/-1}
-    .btn-submit{width:100%;padding:16px;background:linear-gradient(135deg,#ff4757,#ff6b81);color:#fff;font-weight:800;font-size:16px;border:none;border-radius:14px;cursor:pointer;transition:transform .2s}
-    .btn-submit:hover{transform:translateY(-2px)}
-    .pending-box{display:none;text-align:center;padding:40px 24px}
-    .pending-box.show{display:block;animation:fadeUp .4s ease}
-    .report-code-table{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left}
-    .report-code-table span{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-    .report-code-table strong{font-size:16px;font-family:monospace}
-    .pending-box h1{font-size:26px;font-weight:800;margin-bottom:10px}
-    .pending-box p{color:var(--muted);margin-bottom:8px}
-    .report-actions{display:flex;gap:12px;margin-top:24px;justify-content:center;flex-wrap:wrap}
-    .report-actions a{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:12px;font-weight:700;font-size:14px}
-    .admin-wa{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff}
-    .report-home{border:1px solid var(--line);color:var(--ink)}
-    @media(max-width:600px){.report-grid{grid-template-columns:1fr}}
-  </style>
-</head>
-<body>
-  <nav class="navbar">
-    <div class="container nav-inner">
-      <a href="index.html" class="logo"><div class="logo-mark">R</div><div>REKBER HB<small>Database Akun Berbahaya</small></div></a>
-      <div class="nav-links" id="navLinks">
-        <a href="index.html">Cek ID</a>
-        <a href="search.html">Cari</a>
-        <a href="lapor.html" class="active">Lapor</a>
-        <a href="list.html">Daftar HB</a>
-      </div>
-      <div class="nav-cta">
-        <button class="theme-toggle" id="themeToggle">🌙</button>
-        <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
-      </div>
-    </div>
-  </nav>
-
-  <main class="report-shell">
-    <div class="report-intro">
-      <div class="badge"><span class="dot"></span> Laporan HB</div>
-      <h1>Lapor Akun Berbahaya</h1>
-      <p>Isi data pelaku lengkap. Setelah dikirim, report code akan muncul — screenshot dan kirim ke admin lewat WhatsApp.</p>
-    </div>
-
-    <form class="report-form" id="reportForm" enctype="multipart/form-data">
-      <label class="report-upload">
-        <span>📷 Foto Profil Akun ML</span>
-        <input type="file" name="profilePhoto" accept="image/*" id="photoInput" required>
-        <img id="photoPreview" alt="Preview">
-        <small id="photoName"></small>
-      </label>
-
-      <div class="report-grid">
-        <label>ID Game<input type="text" name="gameId" inputmode="numeric" pattern="[0-9]+" placeholder="Contoh: 336908795" required></label>
-        <label>Server ID<input type="text" name="serverId" inputmode="numeric" pattern="[0-9]+" placeholder="Contoh: 9674" required></label>
-        <label>Tanggal Transaksi<input type="date" name="transactionDate" required></label>
-        <label>Tanggal HB<input type="date" name="hbDate" required></label>
-        <label class="full">Nama Pelaku / Nama FB<input type="text" name="offenderName" placeholder="Nama pelaku" required></label>
-        <label>WhatsApp Pelaku<input type="tel" name="offenderWa" placeholder="08xxxxxxxxxx"></label>
-        <label>Nama FB Pelapor<input type="text" name="reporterFb" placeholder="Nama Facebook kamu" required></label>
-        <label>Nomor WA Pelapor<input type="tel" name="reporterWa" pattern="08[0-9\- ]{7,}" placeholder="08xxxxxxxxxx" required></label>
-        <label>Nomor WA Korban<input type="tel" name="victimWa" placeholder="08xxxxxxxxxx (opsional)"></label>
-      </div>
-
-      <button type="submit" class="btn-submit">Kirim Laporan</button>
-    </form>
-
-    <div class="pending-box" id="pendingBox">
-      <div class="report-code-table">
-        <div><span>Report Code</span><strong id="reportCode">-</strong></div>
-        <div><span>ID & Server</span><strong id="idLabel">-</strong></div>
-      </div>
-      <h1>✅ Laporan Terkirim</h1>
-      <p>Laporan masuk antrian pending. Admin akan approve lewat Telegram.</p>
-      <p><strong>Screenshot halaman ini</strong> dan kirim ke WhatsApp admin.</p>
-      <div class="report-actions">
-        <a class="admin-wa" id="waAdmin" href="#" target="_blank">💬 WhatsApp Admin</a>
-        <a class="report-home" href="index.html">← Halaman Utama</a>
-      </div>
-    </div>
-  </main>
-
-  <script src="assets/js/config.js"></script>
+  <title>Lapor Akun HB - REKBER HB REKBER</title>
+  <meta name="description" content="Form laporan akun HB untuk masuk daftar pending REKBER HB.">
   <script>
-    const form = document.getElementById('reportForm');
-    const photoInput = document.getElementById('photoInput');
-    const photoPreview = document.getElementById('photoPreview');
-    const photoName = document.getElementById('photoName');
-    const pendingBox = document.getElementById('pendingBox');
-
-    photoInput.addEventListener('change', () => {
-      const file = photoInput.files[0];
-      if (file) {
-        photoPreview.src = URL.createObjectURL(file);
-        photoName.textContent = `File: ${file.name}`;
-        photoInput.closest('.report-upload').classList.add('has-photo');
-      }
-    });
-
-    // Theme
-    const themeToggle = document.getElementById('themeToggle');
-    if (themeToggle) {
-      const saved = localStorage.getItem('rekber-theme') || 'dark';
-      themeToggle.textContent = saved === 'dark' ? '☀️' : '🌙';
-      themeToggle.onclick = () => {
-        const t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-        document.documentElement.dataset.theme = t;
-        localStorage.setItem('rekber-theme', t);
-        themeToggle.textContent = t === 'dark' ? '☀️' : '🌙';
-      };
-    }
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = form.querySelector('.btn-submit');
-      btn.disabled = true;
-      btn.textContent = 'Mengirim...';
-
-      try {
-        const formData = new FormData(form);
-        const res = await fetch(`${window.API_BASE}/api/reports`, {
-          method: 'POST',
-          body: formData
-        });
-        const json = await res.json();
-
-        if (!json.ok) {
-          alert('Error: ' + (json.message || 'Unknown error'));
-          btn.disabled = false;
-          btn.textContent = 'Kirim Laporan';
-          return;
-        }
-
-        const d = json.data || {};
-        document.getElementById('reportCode').textContent = d.report_code;
-        document.getElementById('idLabel').textContent = `${d.id_game} (${d.server})`;
-
-        const msg = [
-          `Halo Admin Rekber, saya sudah submit laporan HB.`,
-          `Report Code: ${d.report_code}`,
-          `ID Game: ${d.id_game}`,
-          `Server: ${d.server}`,
-          `Pelaku: ${d.offender_name}`,
-          `FB Pelapor: ${d.reporter_fb}`
-        ].join('\n');
-
-        document.getElementById('waAdmin').href = `https://wa.me/6281234567890?text=${encodeURIComponent(msg)}`;
-
-        form.style.display = 'none';
-        document.querySelector('.report-intro').style.display = 'none';
-        pendingBox.classList.add('show');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } catch (err) {
-        alert('Error: ' + err.message);
-        btn.disabled = false;
-        btn.textContent = 'Kirim Laporan';
-      }
-    });
+    document.documentElement.dataset.theme = localStorage.getItem('jsn-theme') || 'dark';
   </script>
+  <link rel="icon" href="assets/img/logo.png">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="components/header.js?v=2026-07-07_v2" defer></script>
+  <script src="components/footer.js?v=2026-07-07_v2" defer></script>
+  <script src="components/theme.js" defer></script>
+
+  <!-- SEO & Social Share -->
+  <meta name="author" content="REKBER HB REKBER">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://your-domain.com/lapor.html">
+  <!-- Open Graph (Facebook, WhatsApp, Telegram) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Lapor Akun HB - REKBER HB REKBER">
+  <meta property="og:description" content="Form laporan akun HB untuk masuk daftar pending REKBER HB.">
+  <meta property="og:image" content="https://your-domain.com/assets/img/og-image.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1024">
+  <meta property="og:url" content="https://your-domain.com/lapor.html">
+  <meta property="og:site_name" content="REKBER HB REKBER">
+  <meta property="og:locale" content="id_ID">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lapor Akun HB - REKBER HB REKBER">
+  <meta name="twitter:description" content="Form laporan akun HB untuk masuk daftar pending REKBER HB.">
+  <meta name="twitter:image" content="https://your-domain.com/assets/img/og-image.png">
+  <!-- Google Index -->
+  <meta name="google-site-verification" content="8YfO2SOybZKrDIXzZ-_mN0Epcx-xpD2kevoNworbjOI" />
+</head>
+
+<body class="search-page report-page">
+  <div class="bg-mesh" aria-hidden="true"></div>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <!-- NAVBAR (loaded from components/header.html) -->
+  <div id="header-placeholder"></div>
+  <main class="hb-report-page">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="particles" id="particles"></div>
+    <section class="report-shell">
+      <div class="report-intro">
+        <div class="hb-status"><span class="dot"></span> FORM LAPORAN HB</div>
+        <h1>Lapor Akun Berbahaya</h1>
+        <p>Isi data pelaku dengan lengkap. Setelah laporan dikirim, code laporan akan muncul untuk dikirim ke admin
+          bersama bukti transaksi.</p>
+      </div>
+      <form class="report-form" data-report-form>
+        <label class="report-upload"><span>Masukan Foto Profile ML</span><input type="file" name="profilePhoto"
+            accept="image/*" data-photo-input required><img data-photo-preview alt="Preview foto profil ML"><small
+            data-photo-name></small></label>
+        <div class="report-grid">
+          <label>ID<input type="text" name="gameId" inputmode="numeric" pattern="[0-9]+"
+              placeholder="Contoh: 1308534187" required></label>
+          <label>Server<input type="text" name="serverId" inputmode="numeric" pattern="[0-9]+"
+              placeholder="Contoh: 15334" required></label>
+          <label>Tanggal transaksi<input type="date" name="transactionDate" required></label>
+          <label>Tanggal ke HB<input type="date" name="hbDate" required></label>
+          <label>Nama Lengkap/Nama fb pelaku<input type="text" name="offenderName" placeholder="Nama pelaku"
+              required></label>
+          <label>WhatsApp Pelaku<input type="tel" name="offenderWa" pattern="08[0-9\\- ]{7,}" placeholder="08xxxxxxxxxx"
+              required></label>
+          <label><span class="input-icon fb-icon"><svg viewBox="0 0 24 24">
+                <path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v2H6v4h3v5h4v-5h3l1-4h-4V9c0-.7.3-1 1-1z" />
+              </svg></span> Nama FB Pelapor<input type="text" name="reporterFb" placeholder="Nama Facebook pelapor"
+              required></label>
+          <label><span class="input-icon wa-icon"><svg viewBox="0 0 24 24">
+                <path
+                  d="M12 3a8.8 8.8 0 0 0-7.5 13.4L3.7 21l4.7-1.2A8.9 8.9 0 1 0 12 3zm0 2a6.9 6.9 0 0 1 0 13.8c-1.2 0-2.4-.3-3.4-.9l-.4-.2-1.8.5.5-1.8-.3-.4A6.9 6.9 0 0 1 12 5zm-2.3 3.4c-.2 0-.5 0-.7.3-.2.3-.8.8-.8 2s.8 2.3 1 2.5c.1.2 1.6 2.6 4 3.5 2 .8 2.4.5 2.8.5.4 0 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.7.9c-.1.2-.3.2-.5.1-1.3-.5-2.2-1.2-2.9-2.5-.1-.2 0-.4.1-.5l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5L11 8.9c-.2-.4-.4-.5-.7-.5h-.6z" />
+              </svg></span> Nomor WA Pelapor<input type="tel" name="reporterWa" pattern="08[0-9\\- ]{7,}"
+              placeholder="08xxxxxxxxxx" required></label>
+        </div>
+        <button type="submit" class="report-submit">Kirim Laporan</button>
+      </form>
+      <section class="pending-box" data-pending-box></section>
+    </section>
+  </main>
+  <!-- FOOTER + WIDGETS (loaded from components/footer.html) -->
+  <div id="footer-placeholder"></div>
+
+  <script src="assets/js/script.js"></script>
+  <script src="assets/js/report-form.js?v=2026-06-21_v1"></script>
+
 </body>
+
 </html>
