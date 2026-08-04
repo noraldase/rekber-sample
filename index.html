@@ -578,7 +578,9 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
   max-height:min(760px,92vh);overflow-y:auto;background:#fff;
   scrollbar-width:thin;scrollbar-color:#ccc transparent;
 }
-.rc-img{display:block;width:100%;height:auto}
+.rc-img{display:block;width:100%;height:auto;cursor:zoom-in;transition:transform .25s ease,filter .25s ease}
+.rc-img:hover{transform:scale(1.04);filter:brightness(1.05)}
+.rc-img:active{transform:scale(.99)}
 .rc-img + .rc-img{border-top:1px solid rgba(0,0,0,.08)}
 @media(max-width:480px){.rekber-frame{width:100%}}
 
@@ -589,7 +591,8 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
   align-items:center;justify-content:center;padding:24px;
 }
 .modal.open{display:flex;animation:fadeIn .2s}
-.modal img{max-width:min(640px,92vw);border-radius:20px;border:1px solid var(--line);box-shadow:var(--shadow);animation:popIn .3s cubic-bezier(.34,1.4,.64,1)}
+.modal img{max-width:min(1000px,94vw);max-height:88vh;width:auto;height:auto;object-fit:contain;border-radius:20px;border:1px solid var(--line);box-shadow:var(--shadow);animation:popIn .3s cubic-bezier(.34,1.4,.64,1);cursor:zoom-out}
+.modal img.zoomed{max-width:none;max-height:none}
 .modal-x{
   position:absolute;top:24px;right:24px;width:46px;height:46px;border-radius:50%;
   border:1px solid var(--line);background:var(--surface-solid);color:var(--ink);
@@ -994,15 +997,15 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
   <div class="rekber-frame">
     <button class="rc-x" onclick="closeEpep()" aria-label="Tutup">✕</button>
     <div class="rc-body">
-      <img class="rc-img" src="img/amaninepep1.jpg" alt="Cara Amanin Epep — langkah 1" loading="lazy">
-      <img class="rc-img" src="img/amaninepep2.jpg" alt="Cara Amanin Epep — langkah 2" loading="lazy">
-      <img class="rc-img" src="img/amaninepep3.jpg" alt="Cara Amanin Epep — langkah 3" loading="lazy">
-      <img class="rc-img" src="img/amaninepep4.jpg" alt="Cara Amanin Epep — langkah 4" loading="lazy">
-      <img class="rc-img" src="img/amaninepep5.jpg" alt="Cara Amanin Epep — langkah 5" loading="lazy">
-      <img class="rc-img" src="img/amaninepep6.jpg" alt="Cara Amanin Epep — langkah 6" loading="lazy">
-      <img class="rc-img" src="img/amaninepep7.jpg" alt="Cara Amanin Epep — langkah 7" loading="lazy">
-      <img class="rc-img" src="img/amaninepep8.jpg" alt="Cara Amanin Epep — langkah 8" loading="lazy">
-      <img class="rc-img" src="img/amaninepep9.jpg" alt="Cara Amanin Epep — langkah 9" loading="lazy">
+      <img class="rc-img" src="img/amaninepep1.jpeg" alt="Cara Amanin Epep — langkah 1" loading="lazy" onclick="openModal(this.src)">
+      <img class="rc-img" src="img/amaninepep2.jpeg" alt="Cara Amanin Epep — langkah 2" loading="lazy" onclick="openModal(this.src)">
+      <img class="rc-img" src="img/amaninepep3.jpeg" alt="Cara Amanin Epep — langkah 3" loading="lazy" onclick="openModal(this.src)">
+      <img class="rc-img" src="img/amaninepep4.jpeg" alt="Cara Amanin Epep — langkah 4" loading="lazy" onclick="openModal(this.src)">
+      <img class="rc-img" src="img/amaninepep5.jpeg" alt="Cara Amanin Epep — langkah 5" loading="lazy" onclick="openModal(this.src)">
+      <img class="rc-img" src="img/amaninepep6.jpeg" alt="Cara Amanin Epep — langkah 6" loading="lazy" onclick="openModal(this.src)">
+      <img class="rc-img" src="img/amaninepep7.jpeg" alt="Cara Amanin Epep — langkah 7" loading="lazy" onclick="openModal(this.src)">
+      <img class="rc-img" src="img/amaninepep8.jpeg" alt="Cara Amanin Epep — langkah 8" loading="lazy" onclick="openModal(this.src)">
+      <img class="rc-img" src="img/amaninepep9.jpeg" alt="Cara Amanin Epep — langkah 9" loading="lazy" onclick="openModal(this.src)">
     </div>
   </div>
 </div>
@@ -1144,7 +1147,17 @@ track.addEventListener("mouseenter", ()=>clearInterval(timer));
 track.addEventListener("mouseleave", restartCarousel);
 
 /* ——— modal image ——— */
-function openModal(src){ document.getElementById("modalImg").src = src; document.getElementById("modal").classList.add("open"); document.body.style.overflow = "hidden"; }
+function openModal(src){
+  const img = document.getElementById("modalImg");
+  img.src = src;
+  img.classList.remove("zoomed");
+  document.getElementById("modal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+document.getElementById("modalImg").addEventListener("click", function(){
+  // klik gambar = zoom ke ukuran asli, klik lagi = balik
+  this.classList.toggle("zoomed");
+});
 function closeModal(e){
   if(e.target.id === "modal" || e.target.classList.contains("modal-x")){
     document.getElementById("modal").classList.remove("open");
