@@ -373,7 +373,7 @@ nav.scrolled{background:rgba(5,10,24,.9);border-bottom:1px solid var(--line);box
   border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--card-bg);
   backdrop-filter:blur(8px);
 }
-.fee-row{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:12px;padding:18px 24px;align-items:center}
+.fee-row{display:grid;grid-template-columns:1.6fr 1fr;gap:12px;padding:18px 24px;align-items:center}
 .fee-row.head{background:var(--surface-solid);font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .fee-row:not(.head){border-top:1px solid var(--line);transition:background .2s}
 .fee-row:not(.head):hover{background:rgba(91,154,255,.06)}
@@ -826,19 +826,21 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
   <div class="container">
     <span class="section-tag reveal">💸 List Fee Rekber</span>
     <h2 class="reveal">Fee Rekber</h2>
-    <p class="lead reveal">Transparan, tidak ada biaya tersembunyi. Fee dibayarkan sekali di awal transaksi.</p>
+    <p class="lead reveal">Transparan, tidak ada biaya tersembunyi. Fee dihitung dari nominal transaksi.</p>
     <div class="fee-wrap">
       <div class="fee-table reveal">
-        <div class="fee-row head"><span>Jenis Transaksi</span><span>Fee</span><span style="text-align:right">Keterangan</span></div>
-        <div class="fee-row"><b>Transaksi Lokal</b><span class="pct">2%</span><span style="text-align:right;font-size:12.5px">min. Rp 5.000</span></div>
-        <div class="fee-row"><b>Transaksi Internasional</b><span class="pct">3%</span><span style="text-align:right;font-size:12.5px">via PayPal/Wise</span></div>
-        <div class="fee-row"><b>Jual Beli Akun Game</b><span class="pct">2%</span><span style="text-align:right;font-size:12.5px">Mobile Legends dll</span></div>
-        <div class="fee-row"><b>Top Up / Jasa</b><span class="pct">1%</span><span style="text-align:right;font-size:12.5px">min. Rp 3.000</span></div>
+        <div class="fee-row head"><span>Nominal Transaksi</span><span>Fee</span></div>
+        <div class="fee-row"><b>Rp1.000 – Rp49.000</b><span class="pct">Rp3.000</span></div>
+        <div class="fee-row"><b>Rp50.000 – Rp750.000</b><span class="pct">Rp5.000</span></div>
+        <div class="fee-row"><b>Rp750.000 – Rp999.000</b><span class="pct">Rp10.000</span></div>
+        <div class="fee-row"><b>Rp1.000.000 – Rp2.999.000</b><span class="pct">Rp15.000</span></div>
+        <div class="fee-row"><b>Rp3.000.000 ke atas</b><span class="pct">0,7%</span></div>
       </div>
       <div class="fee-note reveal">
-        <b>ℹ️ Penjelasan Fee</b>
-        <p>Fee dihitung dari <b>nominal transaksi</b> dan dibayarkan oleh penjual atau sesuai kesepakatan di formulir.</p>
-        <p>Untuk nominal besar, fee dapat dinegosiasikan langsung dengan admin.</p>
+        <b>ℹ️ Biaya Tambahan</b>
+        <p><b>Delay</b> (keterlambatan pembayaran): <b>Rp1.500 per hari</b>.</p>
+        <b style="margin-top:16px">🕐 Jam Operasional</b>
+        <p><b>Setiap hari (Open Everyday)</b>, pukul <b>06.30 – 23.30</b>.</p>
         <div class="warn"><b>Catatan:</b> Jangan transfer ke rekening selain yang diberikan admin di group resmi. Cek selalu nama rekening di atas sebelum transfer.</div>
       </div>
     </div>
