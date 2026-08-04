@@ -576,18 +576,16 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
 .viewer.open{display:block;animation:fadeIn .2s}
 .v-stage{
   position:absolute;inset:0;overflow:hidden;
-  cursor:grab;touch-action:none;
+  cursor:zoom-in;touch-action:pan-y;
 }
-.v-stage.grabbing{cursor:grabbing}
 .v-stage img{
   position:absolute;left:50%;top:50%;
   max-width:94vw;max-height:88vh;width:auto;height:auto;
   transform:translate(-50%,-50%);
   border-radius:10px;box-shadow:0 30px 80px -20px rgba(0,0,0,.85);
   user-select:none;-webkit-user-drag:none;pointer-events:none;
+  transition:transform .18s ease;
 }
-.v-stage img.moving{transition:none}
-.v-stage img.drag-mode{max-width:none;max-height:none}
 .v-x{
   position:absolute;top:18px;right:18px;z-index:5;
   width:46px;height:46px;border-radius:50%;border:none;
@@ -612,6 +610,19 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
   padding:8px 18px;border-radius:100px;border:1px solid rgba(255,255,255,.12);
   letter-spacing:.05em;white-space:nowrap;
 }
+.v-zoom{
+  position:absolute;right:18px;bottom:22px;z-index:5;
+  display:flex;flex-direction:column;gap:8px;
+}
+.v-zoom button{
+  width:44px;height:44px;border-radius:13px;border:1px solid rgba(255,255,255,.18);
+  background:rgba(10,14,20,.6);backdrop-filter:blur(6px);
+  color:#fff;font-size:20px;font-weight:700;cursor:pointer;
+  display:grid;place-items:center;
+  transition:background .2s,transform .2s;
+}
+.v-zoom button:hover{background:rgba(45,122,255,.9);transform:scale(1.06)}
+.v-zoom button:active{transform:scale(.94)}
 .v-hint{
   position:absolute;bottom:66px;left:50%;transform:translateX(-50%);z-index:5;
   color:rgba(255,255,255,.75);font-size:12px;font-weight:600;
@@ -1030,7 +1041,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
   <img id="modalImg" src="" alt="Pratinjau">
 </div>
 
-<!-- ===== IMAGE VIEWER (layar penuh — zoom-out, bisa digeser) ===== -->
+<!-- ===== IMAGE VIEWER (layar penuh — zoom) ===== -->
 <div class="viewer" id="viewer">
   <button class="v-x" onclick="closeViewer()" aria-label="Tutup">✕</button>
   <button class="v-arr prev" onclick="vNav(-1)" aria-label="Sebelumnya">‹</button>
@@ -1038,7 +1049,12 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
   <div class="v-stage" id="vStage">
     <img id="vImg" src="" alt="">
   </div>
-  <div class="v-hint">👆 Geser gambar · ◀ ▶ ganti · ✕ tutup</div>
+  <div class="v-zoom">
+    <button onclick="vZoom(-1)" aria-label="Perkecil">−</button>
+    <button onclick="vZoomReset()" aria-label="Reset zoom">⤢</button>
+    <button onclick="vZoom(1)" aria-label="Perbesar">+</button>
+  </div>
+  <div class="v-hint">🔍 Scroll / + − untuk zoom · ◀ ▶ ganti · ✕ tutup</div>
   <div class="v-count" id="vCount">1 / 1</div>
 </div>
 
@@ -1085,7 +1101,8 @@ const VIEWERS = {
   infokontak: ["img/infokontak-fee.jpg"],
   epep: ["img/amaninepep1.jpeg","img/amaninepep2.jpeg","img/amaninepep3.jpeg","img/amaninepep4.jpeg","img/amaninepep5.jpeg","img/amaninepep6.jpeg","img/amaninepep7.jpeg","img/amaninepep8.jpeg","img/amaninepep9.jpeg"],
 };
-let vList = [], vIdx = 0, vTx = 0, vTy = 0, vDrag = null;
+let vList = [], vIdx = 0, vScale = 1;
+const V_MIN = 1, V_MAX = 3, V_STEP = 0.5;
 const vImg = document.getElementById("vImg");
 const vStage = document.getElementById("vStage");
 function openViewer(key){
@@ -1098,7 +1115,6 @@ function openViewer(key){
 function closeViewer(){
   document.getElementById("viewer").classList.remove("open");
   document.body.style.overflow = "";
-  vImg.classList.remove("drag-mode");
 }
 function vNav(d){
   if(!vList.length) return;
@@ -1108,34 +1124,26 @@ function vNav(d){
 function renderViewer(reset){
   vImg.src = vList[vIdx];
   document.getElementById("vCount").textContent = (vIdx + 1) + " / " + vList.length;
-  if(reset) resetPan();
+  if(reset) vScale = 1;
+  applyViewerTransform();
 }
-function resetPan(){
-  vTx = 0; vTy = 0;
-  vImg.classList.remove("drag-mode");
-  vImg.style.transform = "translate(-50%,-50%)";
+function applyViewerTransform(){
+  vImg.style.transform = `translate(-50%,-50%) scale(${vScale})`;
 }
-/* geser (drag) gambar */
-vStage.addEventListener("pointerdown", e=>{
-  vDrag = {x: e.clientX - vTx, y: e.clientY - vTy, moved:false};
-  vStage.setPointerCapture(e.pointerId);
-  vImg.classList.add("moving");
-});
-vStage.addEventListener("pointermove", e=>{
-  if(!vDrag) return;
-  const dx = e.clientX - vDrag.x, dy = e.clientY - vDrag.y;
-  if(Math.abs(dx - vTx) > 3 || Math.abs(dy - vTy) > 3) vDrag.moved = true;
-  vTx = dx; vTy = dy;
-  vImg.style.transform = `translate(calc(-50% + ${vTx}px), calc(-50% + ${vTy}px))`;
-});
-vStage.addEventListener("pointerup", ()=>{
-  vDrag = null;
-  vImg.classList.remove("moving");
-});
-/* double-tap / double-click = mode drag penuh (zoom-out lebar) */
+function vZoom(dir){
+  vScale = Math.min(V_MAX, Math.max(V_MIN, +(vScale + dir * V_STEP).toFixed(2)));
+  applyViewerTransform();
+}
+function vZoomReset(){ vScale = 1; applyViewerTransform(); }
+/* scroll wheel = zoom */
+vStage.addEventListener("wheel", e=>{
+  e.preventDefault();
+  vZoom(e.deltaY < 0 ? 1 : -1);
+},{passive:false});
+/* double-click = toggle zoom fit ↔ 2x */
 vStage.addEventListener("dblclick", ()=>{
-  vImg.classList.toggle("drag-mode");
-  resetPan();
+  vScale = vScale === 1 ? 2 : 1;
+  applyViewerTransform();
 });
 document.addEventListener("keydown", e=>{
   if(e.key === "Escape") closeViewer();
