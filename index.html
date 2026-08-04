@@ -727,7 +727,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
       <a class="menu-item reveal d2" data-modal="rekber" href="#">
         <span class="mi-ic">🤝</span><span class="mi-txt"><b>Cara Rekber</b><small>Alur transaksi aman dari awal sampai dana cair</small></span><span class="mi-arr">→</span>
       </a>
-      <a class="menu-item reveal d3" data-msg="Halo Admin REVI REKBER, gimana cara amanin epep?" href="#">
+      <a class="menu-item reveal d3" data-modal="epep" href="#">
         <span class="mi-ic">🔐</span><span class="mi-txt"><b>Cara Amanin Epep</b><small>Tips amankan e-wallet &amp; akun payment</small></span><span class="mi-arr">→</span>
       </a>
       <a class="menu-item reveal" data-msg="Halo Admin REVI REKBER, minta info saluran & stok akun" href="#">
@@ -989,6 +989,18 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
   </div>
 </div>
 
+<!-- ===== MODAL CARA AMANIN EPEP (gambar asli) ===== -->
+<div class="rekber-modal" id="epepModal" onclick="if(event.target===this)closeEpep()">
+  <div class="rekber-frame">
+    <button class="rc-x" onclick="closeEpep()" aria-label="Tutup">✕</button>
+    <div class="rc-body">
+      <img class="rc-img" src="img/amanin-epep-1.jpg" alt="Cara Amanin Epep — bagian 1" loading="lazy">
+      <img class="rc-img" src="img/amanin-epep-2.jpg" alt="Cara Amanin Epep — bagian 2" loading="lazy">
+      <img class="rc-img" src="img/amanin-epep-3.jpg" alt="Cara Amanin Epep — bagian 3" loading="lazy">
+    </div>
+  </div>
+</div>
+
 <script>
 /* ================================================================
    CONFIG — ISI NOMOR WA & SOSMED DI SINI
@@ -1017,12 +1029,24 @@ function wireWa(){
       el.addEventListener("click", (e)=>{
         e.preventDefault();
         if(el.dataset.modal === "rekber") openRekber();
+        if(el.dataset.modal === "epep") openEpep();
       });
     } else {
       el.href = waLink(el.dataset.msg || CONFIG.waMessage);
     }
   });
 }
+
+/* ——— modal cara amanin epep (gambar) ——— */
+function openEpep(){
+  document.getElementById("epepModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeEpep(){
+  document.getElementById("epepModal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeEpep(); });
 
 /* ——— modal cara rekber (chat) ——— */
 function openRekber(){
