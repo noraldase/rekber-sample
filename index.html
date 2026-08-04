@@ -402,6 +402,32 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
   .marquee-track,.wa-fab{animation:none}
 }
 
+/* ===== MENU LAYANAN ===== */
+.menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.menu-item{
+  display:flex;align-items:center;gap:14px;background:var(--card-bg);
+  border:1px solid var(--line);border-radius:16px;padding:18px 20px;
+  transition:transform .2s,border-color .2s,background .2s;
+}
+.menu-item:hover{transform:translateY(-3px);border-color:rgba(91,154,255,.45);background:var(--surface)}
+.menu-item .mi-ic{width:46px;height:46px;border-radius:13px;background:rgba(91,154,255,.12);border:1px solid rgba(91,154,255,.25);display:grid;place-items:center;font-size:21px;flex:none}
+.menu-item .mi-txt{flex:1;min-width:0}
+.menu-item b{display:block;font-size:15.5px}
+.menu-item small{font-size:12.5px;color:var(--muted);display:block;margin-top:2px}
+.menu-item .mi-arr{color:var(--blue);font-size:18px;font-weight:800}
+@media(max-width:680px){.menu-grid{grid-template-columns:1fr}}
+
+/* ===== CEK DETAIL + BUKTI ===== */
+.cek-res.danger{flex-direction:column;align-items:flex-start;text-align:left}
+.cek-detail{width:100%;margin-top:12px;display:flex;flex-direction:column;gap:5px}
+.cek-detail div{display:flex;justify-content:space-between;gap:14px;font-size:13.5px;border-bottom:1px dashed rgba(255,255,255,.14);padding:5px 0}
+.cek-detail span{color:var(--muted);flex:none}
+.cek-detail strong{text-align:right;word-break:break-all}
+.cek-bukti{margin-top:14px;width:100%}
+.cek-bukti span{font-size:12.5px;color:var(--muted);display:block;margin-bottom:8px}
+.cek-bukti img{max-width:190px;border-radius:12px;border:1px solid var(--line);cursor:pointer;box-shadow:var(--shadow)}
+.cek-bukti img:hover{transform:scale(1.02)}
+
 /* ===== MODAL LOGO ===== */
 .modal{
   position:fixed;inset:0;z-index:200;display:none;
@@ -499,34 +525,48 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
 <section class="container cek-data">
   <div class="cek-card reveal">
     <div>
-      <span class="section-tag">🛡 Cek Data Berbahaya</span>
-      <h3>Cek akun &amp; ID berbahaya</h3>
-      <p>Ketik ID game atau username untuk memeriksa apakah pernah terlibat penipuan/scam di database kami.</p>
+      <span class="section-tag">🛡 Cek Data Penipu</span>
+      <h3>Cek nomor HP / payment penipu</h3>
+      <p>Ketik <b>nomor HP</b> atau <b>payment</b> (DANA / OVO / GoPay / rekening bank) pelaku untuk memeriksa apakah pernah terlibat penipuan/scam di database kami. Hasil lengkap + bukti.</p>
       <div class="cek-form">
-        <input type="text" id="cekInput" placeholder="Masukkan ID Game / Username" value="">
+        <input type="text" id="cekInput" placeholder="Masukkan Nomor HP / Payment penipu" value="">
         <button class="btn btn-blue" onclick="cekAkun()">Cari Sekarang</button>
       </div>
     </div>
     <div class="cek-res" id="cekRes">
-      <span class="big">🔍</span> Tulis ID lalu tekan Cari Sekarang
+      <span class="big">🔍</span> Tulis nomor HP / payment lalu tekan Cari Sekarang
     </div>
   </div>
 </section>
 
-<!-- ===== PANDUAN ===== -->
+<!-- ===== PANDUAN / MENU LAYANAN ===== -->
 <section class="section" id="panduan">
   <div class="container">
-    <span class="section-tag reveal">📋 Panduan</span>
+    <span class="section-tag reveal">📋 Menu Layanan</span>
     <h2 class="reveal">Cara Menggunakan Rekber</h2>
-    <p class="lead reveal">Alur transaksi yang jelas dari kesepakatan sampai dana cair. Semua langkah dipantau admin demi keamanan dua pihak.</p>
-    <div class="steps">
-      <div class="step reveal"><span class="num">01</span><b>Kesepakatan Bersama</b><p>Pembeli &amp; penjual sepakat soal barang, harga, dan metode pembayaran.</p><span class="conn">→</span></div>
-      <div class="step reveal"><span class="num">02</span><b>Buat Group</b><p>Buat group WA berisi pembeli, penjual, dan admin rekber.</p><span class="conn">→</span></div>
-      <div class="step reveal"><span class="num">03</span><b>Isi Formulir</b><p>Isi data transaksi: barang/akun, nominal, dan kesepakatan garansi.</p><span class="conn">→</span></div>
-      <div class="step reveal"><span class="num">04</span><b>Transfer Dana</b><p>Pembeli transfer ke rekening admin — dana dipegang aman oleh rekber.</p><span class="conn">→</span></div>
-      <div class="step reveal"><span class="num">05</span><b>Kirim Barang</b><p>Penjual kirim akun/barang kepada pembeli setelah dana terkonfirmasi.</p><span class="conn">→</span></div>
-      <div class="step reveal"><span class="num">06</span><b>Konfirmasi DONE</b><p>Pembeli cek &amp; terima barang, lalu konfirmasi transaksi DONE.</p><span class="conn">→</span></div>
-      <div class="step reveal"><span class="num">07</span><b>Pencairan Dana</b><p>Dana penjual dicairkan setelah konfirmasi selesai. Transaksi tuntas!</p></div>
+    <p class="lead reveal">Pilih menu di bawah — langsung terhubung ke admin via WhatsApp. Cepat &amp; mudah.</p>
+    <div class="menu-grid">
+      <a class="menu-item reveal" data-msg="Halo Admin REVI REKBER, saya mau tanya info kontak dan fee rekber" href="#">
+        <span class="mi-ic">💳</span><span class="mi-txt"><b>Info Kontak &amp; Fee</b><small>Kontak admin + daftar fee rekber</small></span><span class="mi-arr">→</span>
+      </a>
+      <a class="menu-item reveal" data-msg="Halo Admin REVI REKBER, minta list semua sosmed" href="#">
+        <span class="mi-ic">📱</span><span class="mi-txt"><b>All Sosmed</b><small>Facebook, TikTok, Instagram &amp; lainnya</small></span><span class="mi-arr">→</span>
+      </a>
+      <a class="menu-item reveal" data-msg="Halo Admin REVI REKBER, bagaimana cara pakai rekber?" href="#">
+        <span class="mi-ic">🤝</span><span class="mi-txt"><b>Cara Rekber</b><small>Alur transaksi aman dari awal sampai dana cair</small></span><span class="mi-arr">→</span>
+      </a>
+      <a class="menu-item reveal" data-msg="Halo Admin REVI REKBER, gimana cara amanin epep?" href="#">
+        <span class="mi-ic">🔐</span><span class="mi-txt"><b>Cara Amanin Epep</b><small>Tips amankan e-wallet &amp; akun payment</small></span><span class="mi-arr">→</span>
+      </a>
+      <a class="menu-item reveal" data-msg="Halo Admin REVI REKBER, minta info saluran & stok akun" href="#">
+        <span class="mi-ic">🎮</span><span class="mi-txt"><b>Saluran / Info Stok Akun</b><small>List stok akun game yang tersedia</small></span><span class="mi-arr">→</span>
+      </a>
+      <a class="menu-item reveal" data-msg="Halo Admin REVI REKBER, saya mau jual akun" href="#">
+        <span class="mi-ic">💰</span><span class="mi-txt"><b>Jual Akun Kesini</b><small>Titip jual akun kamu — laku cepat &amp; aman</small></span><span class="mi-arr">→</span>
+      </a>
+      <a class="menu-item reveal" data-msg="Halo Admin REVI REKBER, minta testimoni rekber & jual akun" href="#">
+        <span class="mi-ic">⭐</span><span class="mi-txt"><b>Testi Rekber &amp; Jual Akun</b><small>Bukti transaksi &amp; testimoni pelanggan</small></span><span class="mi-arr">→</span>
+      </a>
     </div>
   </div>
 </section>
@@ -733,6 +773,10 @@ function wireWa(){
     const el = document.getElementById(id);
     if(el) el.href = waLink(CONFIG.waMessage);
   });
+  // Menu layanan → WA dengan pesan masing-masing
+  document.querySelectorAll(".menu-item").forEach(el=>{
+    el.href = waLink(el.dataset.msg || CONFIG.waMessage);
+  });
 }
 /* ——— theme ——— */
 const savedTheme = localStorage.getItem("theme") || "dark";
@@ -777,19 +821,56 @@ function closeModal(e){
 }
 document.addEventListener("keydown", e=>{ if(e.key==="Escape") document.getElementById("modal").classList.remove("open"); });
 
-/* ——— cek akun ——— */
-const DANGER_DB = []; // isi ID/username berbahaya di sini, pisahkan koma
+/* ——— cek data penipu (nomor HP / payment) ——— */
+/* ════════════════════════════════════════════════════════════
+   DATABASE PENIPU — ISI DI SINI (format contoh di bawah)
+   keys   : nomor HP & payment pelaku (boleh lebih dari satu)
+   nama   : nama pelaku
+   payment: nomor/payment yang dipakai (DANA/OVO/GoPay/bank)
+   modus  : cara dia nipu
+   tanggal: tanggal kejadian
+   bukti  : file bukti/screenshot → taruh di img/bukti/, contoh:
+            img/bukti/bukti-1.jpg
+   ════════════════════════════════════════════════════════════ */
+const DANGER_DB = [
+  /* Contoh (hapus tanda // depan untuk aktifkan):
+  {
+    keys: ["081234567890", "dana:081234567890"],
+    nama: "Nama Pelaku",
+    payment: "DANA 0812-3456-7890",
+    modus: "Minta DP 50% lalu kabur",
+    tanggal: "2026-07-15",
+    bukti: "img/bukti/bukti-1.jpg"
+  },
+  */
+];
+
+const norm = s => String(s || "").toLowerCase().replace(/[^0-9a-z]/g, "");
+
 function cekAkun(){
-  const input = document.getElementById("cekInput").value.trim().toLowerCase();
+  const raw = document.getElementById("cekInput").value.trim();
   const res = document.getElementById("cekRes");
-  if(!input){ res.className = "cek-res"; res.innerHTML = "<span class='big'>✏️</span> Masukkan ID terlebih dahulu"; return; }
-  const hit = DANGER_DB.find(d => d.toLowerCase() === input);
+  if(!raw){ res.className = "cek-res"; res.innerHTML = "<span class='big'>✏️</span> Masukkan nomor HP / payment terlebih dahulu"; return; }
+  const q = norm(raw);
+  if(q.length < 6){ res.className = "cek-res"; res.innerHTML = "<span class='big'>⚠️</span> Minimal 6 digit / karakter"; return; }
+  const hit = DANGER_DB.find(d =>
+    d.keys.some(k => norm(k) === q) || norm(d.payment).includes(q)
+  );
   if(hit){
     res.className = "cek-res danger";
-    res.innerHTML = `<span class='big'>⚠️</span>ID <b>${input}</b> terdaftar sebagai akun berbahaya. Hindari transaksi dengan ID ini.</div>`;
+    res.innerHTML = `
+      <span class='big'>⚠️</span> <b>TERDAFTAR SEBAGAI PENIPU</b>
+      <div class="cek-detail">
+        <div><span>Nama</span><strong>${hit.nama}</strong></div>
+        <div><span>Nomor / Payment</span><strong>${hit.payment}</strong></div>
+        <div><span>Modus</span><strong>${hit.modus}</strong></div>
+        <div><span>Tanggal</span><strong>${hit.tanggal}</strong></div>
+      </div>
+      ${hit.bukti ? `<div class="cek-bukti"><span>📎 Bukti (klik untuk perbesar):</span><img src="${hit.bukti}" alt="Bukti" onclick="openModal(this.src)"></div>` : ''}
+      <small style="margin-top:8px">⚠️ Hindari transaksi dengan nomor / payment ini.</small>`;
   } else {
     res.className = "cek-res ok";
-    res.innerHTML = `<span class='big'>✅</span> ID <b>${input}</b> tidak ditemukan di database berbahaya. <br><small>Masih perlu ragu? Laporkan ke admin.</small>`;
+    res.innerHTML = `<span class='big'>✅</span> <b>${raw}</b> tidak ditemukan di database penipu. <br><small>Tetap waspada — verifikasi manual sebelum transfer.</small>`;
   }
 }
 
