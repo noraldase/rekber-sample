@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="img/favicon-brand.png">
+<link rel="apple-touch-icon" href="img/apple-icon.png">
 <style>
 /* ===== CONFIG (EDIT DI SINI) ===== */
 /* nomor WA: format 628xxx (tanpa +) */
@@ -103,13 +105,16 @@ nav.scrolled{background:rgba(5,10,24,.9);border-bottom:1px solid var(--line);box
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px}
 .logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:19px;letter-spacing:-.02em;font-family:var(--font-d)}
 .logo-mark{
-  width:36px;height:36px;border-radius:11px;
-  background:var(--grad-main);
-  display:grid;place-items:center;color:#fff;font-size:15px;font-weight:800;
+  width:38px;height:38px;border-radius:11px;
+  overflow:hidden;flex:none;
+  background:var(--surface-solid);
+  display:grid;place-items:center;
   box-shadow:0 8px 22px -6px var(--blue-glow);
   position:relative;
+  border:1px solid var(--line);
 }
-.logo-mark::after{content:"";position:absolute;inset:-3px;border-radius:14px;background:var(--grad-main);opacity:.35;filter:blur(10px);z-index:-1}
+.logo-mark img{width:100%;height:100%;object-fit:cover;display:block}
+.logo-mark::after{content:"";position:absolute;inset:-3px;border-radius:14px;background:var(--grad-main);opacity:.25;filter:blur(10px);z-index:-1}
 .logo small{display:block;font-size:10px;font-weight:600;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;line-height:1}
 .nav-links{display:flex;gap:6px;align-items:center}
 .nav-links a{
@@ -653,7 +658,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
 <nav id="navbar">
   <div class="container nav-inner">
     <div class="logo">
-      <div class="logo-mark">R</div>
+      <div class="logo-mark"><img src="img/logo-brand-sq.png" alt="Logo Revi Rekber"></div>
       <div>REVI REKBER<small>Admin Rekber &amp; Toko Game</small></div>
     </div>
     <div class="nav-links" id="navLinks">
@@ -946,7 +951,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
     <div class="foot-grid">
       <div class="foot-about">
         <div class="logo">
-          <div class="logo-mark">R</div>
+          <div class="logo-mark"><img src="img/logo-brand-sq.png" alt="Logo Revi Rekber"></div>
           <div>REVI REKBER<small>Admin Rekber &amp; Toko Game</small></div>
         </div>
         <p>Layanan rekening bersama terpercaya oleh Revi Sri Mega Azzahra. Jembatan aman antara pembeli dan penjual untuk transaksi game, akun, dan barang.</p>
