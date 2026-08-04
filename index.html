@@ -174,22 +174,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,248,244,
 @media(max-width:900px){.services{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.services{grid-template-columns:1fr}}
 
-/* ================= GALLERY ================= */
-.gallery{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.g-item{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-sm);cursor:pointer;position:relative;transition:transform .28s}
-.g-item:hover{transform:translateY(-4px)}
-.g-item img{width:100%;aspect-ratio:16/9;object-fit:cover;transition:transform .45s}
-.g-item:hover img{transform:scale(1.04)}
-.g-cap{position:absolute;left:0;right:0;bottom:0;padding:40px 22px 18px;background:linear-gradient(transparent,rgba(10,16,14,.78));color:#f4f1e8;font-family:var(--font-display);font-weight:500;font-size:16px;letter-spacing:.02em}
-@media(max-width:700px){.gallery{grid-template-columns:1fr}}
-
-/* ================= MASCOT GRID ================= */
-.mascots{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.m-item{border-radius:18px;overflow:hidden;border:1px solid var(--line);cursor:pointer;transition:all .25s;position:relative}
-.m-item:hover{transform:translateY(-4px);box-shadow:var(--shadow-sm)}
-.m-item img{width:100%;aspect-ratio:3/4;object-fit:cover;transition:transform .4s}
-.m-item:hover img{transform:scale(1.05)}
-@media(max-width:900px){.mascots{grid-template-columns:repeat(2,1fr)}}
+/* ================= LOKAL & INTERNASIONAL ================= */
+.card-split{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:24px}
+.split-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:34px 30px;transition:all .28s}
+.split-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-sm);border-color:var(--line-2)}
+.split-card .s-ic{width:54px;height:54px;border-radius:16px;background:var(--emerald-soft);display:grid;place-items:center;font-size:24px;margin-bottom:22px}
+.split-card h3{font-family:var(--font-display);font-weight:600;font-size:20px;margin-bottom:10px}
+.split-card p{font-size:14px;color:var(--muted);margin-bottom:20px;max-width:420px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.single-banner{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-sm);cursor:pointer;transition:transform .28s}
+.single-banner:hover{transform:translateY(-4px)}
+.single-banner img{width:100%;aspect-ratio:16/7;object-fit:cover;transition:transform .45s}
+.single-banner:hover img{transform:scale(1.02)}
+.s-cap{position:absolute;left:0;right:0;bottom:0;padding:44px 26px 18px;background:linear-gradient(transparent,rgba(10,16,14,.78));color:#f4f1e8;font-family:var(--font-display);font-weight:500;font-size:16px;letter-spacing:.02em}
+@media(max-width:800px){.card-split{grid-template-columns:1fr}.single-banner img{aspect-ratio:4/3}}
 
 /* ================= TESTIMONI ================= */
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -399,15 +397,23 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:70px 0 32
       <h2>Melayani dua pasar</h2>
       <p class="lead">Transaksi dalam negeri maupun luar negeri — klik banner untuk memperbesar.</p>
     </div>
-    <div class="gallery reveal">
-      <div class="g-item" onclick="openModal('img/banner-local.jpg')"><img src="img/banner-local.jpg" alt="Transaksi lokal"><span class="g-cap">Transaksi Lokal</span></div>
-      <div class="g-item" onclick="openModal('img/banner-intl.jpg')"><img src="img/banner-intl.jpg" alt="Transaksi internasional"><span class="g-cap">Transaksi Internasional</span></div>
+    <div class="card-split">
+      <div class="split-card reveal">
+        <span class="s-ic">🇮🇩</span>
+        <h3>Transaksi Lokal</h3>
+        <p>QRIS, transfer bank, dan e-wallet lokal — jual beli akun &amp; barang di dalam negeri.</p>
+        <div class="chips"><span class="pay-chip">QRIS</span><span class="pay-chip">BCA</span><span class="pay-chip">BRI</span><span class="pay-chip">DANA</span><span class="pay-chip">GoPay</span></div>
+      </div>
+      <div class="split-card reveal">
+        <span class="s-ic">🌐</span>
+        <h3>Transaksi Internasional</h3>
+        <p>Pembayaran lintas negara dengan PayPal, Wise, dan metode internasional lainnya.</p>
+        <div class="chips"><span class="pay-chip">PayPal</span><span class="pay-chip">Wise</span><span class="pay-chip">Bank Transfer</span></div>
+      </div>
     </div>
-    <div class="mascots" style="margin-top:22px">
-      <div class="m-item reveal" onclick="openModal('img/mascot-2.jpg')"><img src="img/mascot-2.jpg" alt="Mascot Revi Rekber 2"></div>
-      <div class="m-item reveal" onclick="openModal('img/mascot-3.jpg')"><img src="img/mascot-3.jpg" alt="Mascot Revi Rekber 3"></div>
-      <div class="m-item reveal" onclick="openModal('img/mascot-4.jpg')"><img src="img/mascot-4.jpg" alt="Mascot Revi Rekber 4"></div>
-      <div class="m-item reveal" onclick="openModal('img/mascot-1.jpg')"><img src="img/mascot-1.jpg" alt="Mascot Revi Rekber 1"></div>
+    <div class="single-banner reveal" onclick="openModal('img/banner.jpg')">
+      <img src="img/banner.jpg" alt="Layanan Rekber Revi">
+      <span class="s-cap">Layanan Rekber &amp; Toko Game — Revi Sri Mega Azzahra</span>
     </div>
   </div>
 </section>
