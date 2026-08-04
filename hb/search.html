@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cari ID HB — REKBER HB</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('rekber-theme')||'dark';</script>
+  <style>
+    .search-page{max-width:640px;margin:0 auto;padding:60px 24px}
+    .search-page h1{font-size:30px;font-weight:800;text-align:center;margin-bottom:6px}
+    .search-page > p{text-align:center;color:var(--muted);font-size:15px;margin-bottom:28px}
+    .hb-search-form{display:flex;gap:10px;margin-bottom:24px}
+    .hb-search-form input{flex:1;background:var(--card);border:1px solid var(--line);color:var(--ink);font-family:inherit;font-size:16px;font-weight:600;padding:16px 20px;border-radius:14px;outline:none}
+    .hb-search-form input:focus{border-color:var(--blue)}
+    .hb-search-form button{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#2d7aff,#5b9aff);color:#fff;font-weight:700;padding:16px 28px;border:none;border-radius:14px;cursor:pointer}
+    @media(max-width:480px){.hb-search-form{flex-direction:column}.hb-search-form button{justify-content:center}}
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo"><div class="logo-mark">R</div><div>REKBER HB<small>Database Akun Berbahaya</small></div></a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Cek ID</a>
+        <a href="search.html" class="active">Cari</a>
+        <a href="lapor.html">Lapor</a>
+        <a href="list.html">Daftar HB</a>
+      </div>
+      <div class="nav-cta">
+        <button class="theme-toggle" id="themeToggle">🌙</button>
+        <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="search-page">
+    <h1>Cari ID Game</h1>
+    <p>Masukkan ID Game (tanpa server) untuk cek apakah akun tercatat HB.</p>
+    <form class="hb-search-form" id="searchForm">
+      <input type="text" inputmode="numeric" name="gameId" placeholder="Contoh: 336908795" autocomplete="off" required>
+      <button type="submit">🔍 Cari</button>
+    </form>
+    <div id="result"></div>
+  </main>
+
+  <script src="assets/js/config.js"></script>
+  <script>
+    function escapeHtml(str){if(str==null)return '';return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+    const box = document.getElementById('result');
+    document.getElementById('searchForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = e.target.gameId.value.replace(/\D/g,'');
+      if(!id) return;
+      box.className = 'search-result show';
+      box.innerHTML = '<div class="loading"><span class="dot"></span> Mencari...</div>';
+      try {
+        const res = await fetch(`${window.API_BASE}/api/hb/search?id=${encodeURIComponent(id)}`);
+        const json = await res.json();
+        if (json.ok && json.found && json.data) {
+          const r = json.data;
+          box.className = 'search-result show found';
+          box.innerHTML = `
+            <div class="result-header"><span class="status-badge danger">⚠️ AKUN BERBAHAYA</span></div>
+            <div class="result-body">
+              ${r.image_path ? `<img src="${window.API_BASE}/uploads/${r.image_path}" alt="">` : ''}
+              <div class="result-info">
+                <h3>${escapeHtml(r.id_game)} (${escapeHtml(r.server)})</h3>
+                <p><strong>Pelaku:</strong> ${escapeHtml(r.offender_name)}</p>
+                <p><strong>Tanggal HB:</strong> ${r.hb_date || '-'}</p>
+                <p><strong>Dilapor oleh:</strong> ${escapeHtml(r.reporter_fb)}</p>
+                ${r.approved_by ? `<p class="approved">✓ Approved by ${escapeHtml(r.approved_by)}</p>` : ''}
+              </div>
+            </div>
+            <a href="view.html?id=${encodeURIComponent(r.id_game)}" class="btn-detail">Lihat Detail →</a>`;
+        } else {
+          box.className = 'search-result show clean';
+          box.innerHTML = `<div class="result-header"><span class="status-badge safe">✅ ID Bersih</span></div>
+            <p>ID <strong>${escapeHtml(id)}</strong> tidak terdaftar dalam database akun HB.</p>
+            <p class="hint">Tetap hati-hati dan gunakan jasa rekber untuk transaksi.</p>`;
+        }
+      } catch (err) {
+        box.className = 'search-result show error';
+        box.innerHTML = `<p>Gagal menghubungi server: ${escapeHtml(err.message)}</p>`;
+      }
+    });
+  </script>
+</body>
+</html>
