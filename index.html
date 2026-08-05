@@ -637,8 +637,9 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
 }
 .v-cta-ic{
   width:64px;height:64px;border-radius:18px;margin:0 auto 16px;display:grid;place-items:center;
-  font-size:28px;background:var(--grad-main);box-shadow:0 12px 30px -8px var(--blue-glow);
+  overflow:hidden;padding:0;background:transparent;box-shadow:0 12px 30px -8px rgba(0,0,0,.45);
 }
+.v-cta-ic img{width:100%;height:100%;object-fit:cover;display:block}
 .v-cta-inner h4{font-size:21px;margin-bottom:10px}
 .v-cta-inner p{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:22px}
 .v-cta-btn{
@@ -649,7 +650,6 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
   transition:filter .2s,transform .2s;
 }
 .v-cta-btn:hover{filter:brightness(1.1);transform:translateY(-2px)}
-.v-cta-btn .v-cta-logo{width:32px;height:32px;border-radius:50%;object-fit:cover;flex:none;border:2px solid rgba(255,255,255,.85);box-shadow:0 6px 14px -6px rgba(0,0,0,.4)}
 .v-cta-note{display:block;margin-top:14px;font-size:12.5px;color:var(--muted-2)}
 .v-x{
   position:absolute;top:18px;right:18px;z-index:5;
@@ -1098,11 +1098,10 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
     <img id="vImg" src="" alt="">
     <div class="v-cta" id="vCta" style="display:none">
       <div class="v-cta-inner">
-        <span class="v-cta-ic">🔐</span>
+        <span class="v-cta-ic"><img src="img/epep-logo.jpg" alt="Logo Rebind Epep"></span>
         <h4>Akun Epep Kamu Kena Masalah?</h4>
         <p>Jasa rebind &amp; hapus permanen untuk akun e-wallet / payment yang terkunci, kehilangan akses, atau perlu direset total.</p>
         <a class="v-cta-btn" id="vCtaBtn" href="#" target="_blank" rel="noopener">
-          <img class="v-cta-logo" src="img/epep-logo.jpg" alt="Logo Rebind Epep">
           JASA REBIND &amp; HAPUS PERMANEN
         </a>
         <span class="v-cta-note">Konsultasi dulu ke admin — respon cepat via WhatsApp</span>
