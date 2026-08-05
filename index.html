@@ -578,6 +578,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
   box-shadow:0 10px 22px -8px rgba(37,211,102,.45);
 }
 .admin-pick-card:nth-child(2) .ap-av{background:var(--grad-main);box-shadow:0 10px 22px -8px var(--blue-glow)}
+.admin-pick-card .ap-av.ap-img{object-fit:cover;background:transparent;border:2px solid rgba(232,184,75,.35);box-shadow:0 10px 22px -8px rgba(232,184,75,.55)}
 .admin-pick-card b{font-size:15px}
 .admin-pick-card .ap-num{font-size:12.5px;color:var(--muted);font-family:var(--font-d);letter-spacing:.02em}
 .admin-pick-card .ap-btn{
@@ -1069,11 +1070,11 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
 <div class="admin-pick-overlay" id="adminPick" onclick="if(event.target===this)closeAdminPick()">
   <div class="admin-pick">
     <button class="admin-pick-x" onclick="closeAdminPick()" aria-label="Tutup">✕</button>
-    <h3>💰 Jual Akun</h3>
-    <p>Pilih admin yang mau kamu hubungi. Pesan otomatis akan terisi — tinggal kirim.</p>
+    <h3 id="apTitle">💰 Jual Akun</h3>
+    <p id="apDesc">Pilih admin yang mau kamu hubungi. Pesan otomatis akan terisi — tinggal kirim.</p>
     <div class="admin-pick-grid">
       <a class="admin-pick-card" href="#" data-admin="1">
-        <span class="ap-av">1</span>
+        <img class="ap-av ap-img" src="img/favicon-brand.png" alt="Admin 1" width="54" height="54">
         <b>Admin 1</b>
         <span class="ap-num">0851-5619-5534</span>
         <span class="ap-btn">Chat Admin 1</span>
@@ -1141,10 +1142,18 @@ const waLink = (msg) => `https://wa.me/${CONFIG.waNumber}?text=${encodeURICompon
 
 /* ——— wire WA links ——— */
 function wireWa(){
-  ["waNav","waHero","waContact","waFab"].forEach(id=>{
+  ["waNav","waHero","waFab"].forEach(id=>{
     const el = document.getElementById(id);
     if(el) el.href = waLink(CONFIG.waMessage);
   });
+  // Kartu WhatsApp di section Kontak → modal pilih admin (pesan umum)
+  const waC = document.getElementById("waContact");
+  if(waC){
+    waC.addEventListener("click", (e)=>{
+      e.preventDefault();
+      openAdminPick(CONFIG.waMessage);
+    });
+  }
   // Social links → target eksternal
   const soc = { fbContact: CONFIG.facebook, ttContact: CONFIG.tiktok, igContact: CONFIG.instagram };
   Object.keys(soc).forEach(id=>{
@@ -1203,6 +1212,18 @@ function wireWa(){
 let vPickMsg = "";
 function openAdminPick(msg){
   vPickMsg = msg || CONFIG.waSellMessage;
+  const t = document.getElementById("apTitle");
+  const d = document.getElementById("apDesc");
+  if(msg === CONFIG.waRebindMessage){
+    t.textContent = "🔐 Rebind & Hapus Permanen";
+    d.textContent = "Pilih admin untuk konsultasi jasa rebind / hapus permanen akun e-wallet & payment.";
+  } else if(msg === CONFIG.waMessage){
+    t.textContent = "📞 Hubungi Admin";
+    d.textContent = "Pilih admin yang mau kamu hubungi. Pesan otomatis akan terisi — tinggal kirim.";
+  } else {
+    t.textContent = "💰 Jual Akun";
+    d.textContent = "Pilih admin yang mau kamu hubungi. Pesan otomatis akan terisi — tinggal kirim.";
+  }
   document.getElementById("adminPick").classList.add("open");
 }
 function closeAdminPick(){ document.getElementById("adminPick").classList.remove("open"); }
