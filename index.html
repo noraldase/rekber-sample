@@ -588,6 +588,10 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
 }
 .admin-pick-card:nth-child(2) .ap-btn{background:var(--grad-main)}
 .admin-pick-card .ap-btn:hover{filter:brightness(1.12)}
+.admin-pick-card.testi-soon{opacity:.62;cursor:not-allowed;filter:grayscale(.35)}
+.admin-pick-card.testi-soon:hover{transform:none;border-color:var(--line);background:var(--card-bg)}
+.admin-pick-card.testi-soon .ap-av{background:#4b5668;box-shadow:none}
+.admin-pick-card.testi-soon .ap-btn.soon{background:#4b5668;cursor:not-allowed;filter:none}
 .admin-pick-x{
   position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;
   border:1px solid var(--line);background:var(--surface);color:var(--muted);
@@ -858,7 +862,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
       <a class="menu-item reveal d1" data-sell href="#">
         <span class="mi-ic">💰</span><span class="mi-txt"><b>Jual Akun Kesini</b><small>Titip jual akun kamu — laku cepat &amp; aman</small></span><span class="mi-arr">→</span>
       </a>
-      <a class="menu-item reveal d2" data-external="https://www.facebook.com/100093453295456/posts/731615779963525/?app=fbl" href="https://www.facebook.com/100093453295456/posts/731615779963525/?app=fbl" target="_blank" rel="noopener">
+      <a class="menu-item reveal d2" data-testi href="#">
         <span class="mi-ic">⭐</span><span class="mi-txt"><b>Testi Rekber &amp; Jual Akun</b><small>Bukti transaksi &amp; testimoni pelanggan</small></span><span class="mi-arr">→</span>
       </a>
     </div>
@@ -1059,6 +1063,29 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
   </div>
 </div>
 
+<!-- ===== PICKER TESTI (Rekber / Jual Akun) ===== -->
+<div class="admin-pick-overlay" id="testiPick" onclick="if(event.target===this)closeTestiPick()">
+  <div class="admin-pick">
+    <button class="admin-pick-x" onclick="closeTestiPick()" aria-label="Tutup">✕</button>
+    <h3>⭐ Testi Rekber &amp; Jual Akun</h3>
+    <p>Pilih jenis testimoni / bukti transaksi yang mau kamu lihat.</p>
+    <div class="admin-pick-grid">
+      <a class="admin-pick-card testi-link" href="https://www.facebook.com/100093453295456/posts/731615779963525/?app=fbl" target="_blank" rel="noopener">
+        <span class="ap-av">⭐</span>
+        <b>Testi Rekber</b>
+        <span class="ap-num">Bukti transaksi rekening bersama</span>
+        <span class="ap-btn">Lihat Testi Rekber →</span>
+      </a>
+      <div class="admin-pick-card testi-soon" aria-disabled="true">
+        <span class="ap-av">🕐</span>
+        <b>Testi Jual Akun</b>
+        <span class="ap-num">Segera diupdate</span>
+        <span class="ap-btn soon">Segera Hadir</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ===== IMAGE VIEWER (layar penuh — zoom) ===== -->
 <div class="viewer" id="viewer">
   <button class="v-x" onclick="closeViewer()" aria-label="Tutup">✕</button>
@@ -1145,6 +1172,11 @@ function wireWa(){
         e.preventDefault();
         openAdminPick();
       });
+    } else if(el.dataset.testi !== undefined){
+      el.addEventListener("click", (e)=>{
+        e.preventDefault();
+        openTestiPick();
+      });
     } else if(el.dataset.goto !== undefined){
       el.addEventListener("click", (e)=>{
         e.preventDefault();
@@ -1198,6 +1230,8 @@ function openAdminPick(msg){
   document.getElementById("adminPick").classList.add("open");
 }
 function closeAdminPick(){ document.getElementById("adminPick").classList.remove("open"); }
+function openTestiPick(){ document.getElementById("testiPick").classList.add("open"); }
+function closeTestiPick(){ document.getElementById("testiPick").classList.remove("open"); }
 const waLinkNum = (num, msg) => `https://wa.me/${num}?text=${encodeURIComponent(msg)}`;
 
 /* ——— IMAGE VIEWER (layar penuh, zoom-out + geser) ——— */
