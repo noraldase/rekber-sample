@@ -1202,7 +1202,9 @@ function wireWa(){
   });
 
   // Picker admin jual akun → WA sesuai admin
-  document.querySelectorAll(".admin-pick-card").forEach(card=>{
+  // Hanya kartu yang punya data-admin (adminPick). Kartu modal testi (testiPick)
+  // TIDAK ikut ter-bind supaya tetap jadi tautan biasa ke FB / status "Segera Hadir".
+  document.querySelectorAll(".admin-pick-card[data-admin]").forEach(card=>{
     card.addEventListener("click", (e)=>{
       e.preventDefault();
       const n = card.dataset.admin;
