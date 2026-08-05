@@ -1131,6 +1131,8 @@ const CONFIG = {
   facebook: "https://web.facebook.com/profile.php?id=100093453295456&_rdc=1&_rdr#", // FB Revi Rekber
   tiktok: "https://www.tiktok.com/@revii_03",          // TikTok Revi Rekber
   instagram: "https://www.instagram.com/reevvy_", // IG Revi Rekber
+  // Backend data penipu (API). Fallback otomatis ke DANGER_DB lokal kalau mati.
+  apiBase: "https://api.neoparty.web.id/penipu",
   // ===== GALERI =====
   banners: ["img/banner-local.jpg","img/banner-intl.jpg"],
 };
@@ -1412,31 +1414,53 @@ const DANGER_DB = [
 
 const norm = s => String(s || "").toLowerCase().replace(/[^0-9a-z]/g, "");
 
-function cekAkun(){
-  const raw = document.getElementById("cekInput").value.trim();
+function renderDanger(res, input, hits){
+  let html = `<span class='big'>⚠️</span> <b>TERDAFTAR SEBAGAI PENIPU</b>`;
+  hits.forEach(h=>{
+    html += `<div class="cek-detail" style="margin-top:6px">
+      <div><span>Nama</span><strong>${h.nama}</strong></div>
+      <div><span>Nomor / Payment</span><strong>${h.payment}</strong></div>`;
+    if(h.modus) html += `<div><span>Modus</span><strong>${h.modus}</strong></div>`;
+    if(h.tanggal) html += `<div><span>Tanggal</span><strong>${h.tanggal}</strong></div>`;
+    html += `</div>`;
+    if(h.image) html += `<div class="cek-bukti"><span>📎 Bukti (klik untuk perbesar):</span><img src="${h.image}" alt="Bukti" onclick="openModal(this.src)" loading="lazy"></div>`;
+  });
+  html += `<small style="margin-top:8px">⚠️ Hindari transaksi dengan nomor / payment ini.</small>`;
+  res.className = "cek-res danger";
+  res.innerHTML = html;
+}
+
+async function cekAkun(){
+  const input = document.getElementById("cekInput").value.trim();
   const res = document.getElementById("cekRes");
-  if(!raw){ res.className = "cek-res"; res.innerHTML = "<span class='big'>✏️</span> Masukkan nomor HP / payment terlebih dahulu"; return; }
-  const q = norm(raw);
+  if(!input){ res.className = "cek-res"; res.innerHTML = "<span class='big'>✏️</span> Masukkan nomor HP / payment terlebih dahulu"; return; }
+  const q = norm(input);
   if(q.length < 6){ res.className = "cek-res"; res.innerHTML = "<span class='big'>⚠️</span> Minimal 6 digit / karakter"; return; }
-  const hit = DANGER_DB.find(d =>
-    d.keys.some(k => norm(k) === q) || norm(d.payment).includes(q)
-  );
-  if(hit){
-    res.className = "cek-res danger";
-    res.innerHTML = `
-      <span class='big'>⚠️</span> <b>TERDAFTAR SEBAGAI PENIPU</b>
-      <div class="cek-detail">
-        <div><span>Nama</span><strong>${hit.nama}</strong></div>
-        <div><span>Nomor / Payment</span><strong>${hit.payment}</strong></div>
-        <div><span>Modus</span><strong>${hit.modus}</strong></div>
-        <div><span>Tanggal</span><strong>${hit.tanggal}</strong></div>
-      </div>
-      ${hit.bukti ? `<div class="cek-bukti"><span>📎 Bukti (klik untuk perbesar):</span><img src="${hit.bukti}" alt="Bukti" onclick="openModal(this.src)"></div>` : ''}
-      <small style="margin-top:8px">⚠️ Hindari transaksi dengan nomor / payment ini.</small>`;
-  } else {
-    res.className = "cek-res ok";
-    res.innerHTML = `<span class='big'>✅</span> <b>${raw}</b> tidak ditemukan di database penipu. <br><small>Tetap waspada — verifikasi manual sebelum transfer.</small>`;
+
+  // 1) Cek database lokal (DANGER_DB) dulu
+  const localHits = DANGER_DB.filter(d => d.keys.some(k => norm(k) === q) || norm(d.payment).includes(q));
+  if(localHits.length){ renderDanger(res, input, localHits); return; }
+
+  // 2) Cek backend (database bot Telegram)
+  const base = CONFIG.apiBase || "";
+  if(base){
+    try{
+      res.className = "cek-res"; res.innerHTML = "<span class='big'>🔎</span> Mencari di database…";
+      const r = await fetch(base + "/api/penipu/search?q=" + encodeURIComponent(q), { signal: AbortSignal.timeout(8000) });
+      if(r.ok){
+        const j = await r.json();
+        if(j.found && j.data.length){
+          const rows = j.data.map(h => ({ ...h, image: h.image ? base + "/" + h.image : null }));
+          renderDanger(res, input, rows);
+          return;
+        }
+      }
+    }catch(e){ /* backend tidak bisa dijangkau → fallback ke hasil "tidak ditemukan" */ }
   }
+
+  // 3) Tidak ada catatan
+  res.className = "cek-res ok";
+  res.innerHTML = `<span class='big'>✅</span> <b>${input}</b> tidak ditemukan di database penipu. <br><small>Tetap waspada — verifikasi manual sebelum transfer.</small>`;
 }
 
 /* ——— FAQ ——— */
