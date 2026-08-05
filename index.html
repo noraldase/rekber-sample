@@ -542,6 +542,8 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
   box-shadow:0 8px 20px -6px var(--blue-glow);
 }
 .menu-item:nth-child(2n) .mi-ic{background:var(--grad-violet);box-shadow:0 8px 20px -6px rgba(139,123,255,.4)}
+.menu-item .mi-ic.img-ic{background:#fff;border:1px solid var(--line);overflow:hidden;padding:3px;box-shadow:0 8px 20px -6px rgba(206,123,109,.45)}
+.menu-item .mi-ic.img-ic img{width:100%;height:100%;object-fit:cover;border-radius:10px;display:block}
 .menu-item .mi-txt{flex:1;min-width:0}
 .menu-item b{display:block;font-size:15.5px}
 .menu-item small{font-size:12.5px;color:var(--muted);display:block;margin-top:2px}
@@ -862,6 +864,9 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
       <a class="menu-item reveal d1" data-sell href="#">
         <span class="mi-ic">💰</span><span class="mi-txt"><b>Jual Akun Kesini</b><small>Titip jual akun kamu — laku cepat &amp; aman</small></span><span class="mi-arr">→</span>
       </a>
+      <a class="menu-item reveal d2" data-lapor href="#">
+        <span class="mi-ic img-ic"><img src="img/lapor-ikon.jpg" alt="Lapor Masalah" loading="lazy"></span><span class="mi-txt"><b>Transaksi Bermasalah? Lapor!</b><small>Hanya untuk transaksi di REVI REKBER</small></span><span class="mi-arr">→</span>
+      </a>
       <a class="menu-item reveal d2" data-testi href="#">
         <span class="mi-ic">⭐</span><span class="mi-txt"><b>Testi Rekber &amp; Jual Akun</b><small>Bukti transaksi &amp; testimoni pelanggan</small></span><span class="mi-arr">→</span>
       </a>
@@ -1126,6 +1131,7 @@ const CONFIG = {
   waAdmin2: "6289524530020",                      // Admin 2 — 089524530020
   waSellMessage: "Halo Admin REVI REKBER, saya mau jual akun. Berikut detail akun yang mau saya titipkan:",
   waRebindMessage: "Halo Admin REVI REKBER, saya mau tanya jasa REBIND & HAPUS PERMANEN akun e-wallet/payment",
+  waLaporMessage: "Halo Admin REVI REKBER, saya mau laporkan masalah transaksi di REVI REKBER. Detail:\n\n",
   facebook: "https://web.facebook.com/profile.php?id=100093453295456&_rdc=1&_rdr#", // FB Revi Rekber
   tiktok: "https://www.tiktok.com/@revii_03",          // TikTok Revi Rekber
   instagram: "https://www.instagram.com/reevvy_", // IG Revi Rekber
@@ -1171,6 +1177,11 @@ function wireWa(){
       el.addEventListener("click", (e)=>{
         e.preventDefault();
         openAdminPick();
+      });
+    } else if(el.dataset.lapor !== undefined){
+      el.addEventListener("click", (e)=>{
+        e.preventDefault();
+        openAdminPick(CONFIG.waLaporMessage);
       });
     } else if(el.dataset.testi !== undefined){
       el.addEventListener("click", (e)=>{
@@ -1220,6 +1231,9 @@ function openAdminPick(msg){
   if(msg === CONFIG.waRebindMessage){
     t.textContent = "🔐 Rebind & Hapus Permanen";
     d.textContent = "Pilih admin untuk konsultasi jasa rebind / hapus permanen akun e-wallet & payment.";
+  } else if(msg === CONFIG.waLaporMessage){
+    t.textContent = "🚨 Lapor Masalah Transaksi";
+    d.textContent = "Pilih admin untuk melaporkan masalah transaksi di REVI REKBER. Pesan otomatis terisi — lengkapi detail & kirim.";
   } else if(msg === CONFIG.waMessage){
     t.textContent = "📞 Hubungi Admin";
     d.textContent = "Pilih admin yang mau kamu hubungi. Pesan otomatis akan terisi — tinggal kirim.";
