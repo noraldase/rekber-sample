@@ -816,9 +816,6 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
     <h2 class="reveal">Cara Menggunakan Rekber</h2>
     <p class="lead reveal">Pilih menu di bawah — langsung terhubung ke admin via WhatsApp. Cepat &amp; mudah.</p>
     <div class="menu-grid">
-      <a class="menu-item reveal" data-modal="infokontak" href="#">
-        <span class="mi-ic">💳</span><span class="mi-txt"><b>Info Kontak &amp; Fee</b><small>Kontak admin + daftar fee rekber</small></span><span class="mi-arr">→</span>
-      </a>
       <a class="menu-item reveal d1" data-goto="#kontak" href="#kontak">
         <span class="mi-ic">📱</span><span class="mi-txt"><b>All Sosmed</b><small>Facebook, TikTok, Instagram &amp; lainnya</small></span><span class="mi-arr">→</span>
       </a>
@@ -828,7 +825,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
       <a class="menu-item reveal d3" data-modal="epep" href="#">
         <span class="mi-ic">🔐</span><span class="mi-txt"><b>Cara Amanin Epep</b><small>Tips amankan e-wallet &amp; akun payment</small></span><span class="mi-arr">→</span>
       </a>
-      <a class="menu-item reveal" data-msg="Halo Admin REVI REKBER, minta info saluran & stok akun" href="#">
+      <a class="menu-item reveal" data-external="https://whatsapp.com/channel/0029VbAfQxzA2pLCKvBl4m46" href="https://whatsapp.com/channel/0029VbAfQxzA2pLCKvBl4m46" target="_blank" rel="noopener">
         <span class="mi-ic">🎮</span><span class="mi-txt"><b>Saluran / Info Stok Akun</b><small>List stok akun game yang tersedia</small></span><span class="mi-arr">→</span>
       </a>
       <a class="menu-item reveal d1" data-sell href="#">
@@ -1135,6 +1132,8 @@ function wireWa(){
         const target = document.querySelector(el.dataset.goto);
         if(target){ target.scrollIntoView({behavior:"smooth"}); }
       });
+    } else if(el.dataset.external !== undefined){
+      // link eksternal — href sudah di-set di HTML, biarkan
     } else {
       el.href = waLink(el.dataset.msg || CONFIG.waMessage);
     }
