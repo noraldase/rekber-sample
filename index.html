@@ -760,7 +760,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
       <h1>Transaksi Aman Bersama<br><span class="grad">Revi Sri Mega Azzahra</span></h1>
       <p class="lead">Layanan rekening bersama (rekber) yang mengutamakan keamanan transaksi, proses cepat, dan pelayanan profesional — untuk jual beli game, akun, dan barang, lokal maupun internasional.</p>
       <div class="hero-actions">
-        <a class="btn btn-blue" id="waHero" href="#" target="_blank" rel="noopener">Mulai Transaksi →</a>
+        <a class="btn btn-blue" id="waHero" href="https://www.facebook.com/profile.php?id=100093453295456" target="_blank" rel="noopener">Mulai Transaksi →</a>
         <a class="btn btn-ghost" href="#panduan">Pelajari Cara Kerja</a>
       </div>
       <div class="hero-trust">
@@ -1113,7 +1113,7 @@ const waLink = (msg) => `https://wa.me/${CONFIG.waNumber}?text=${encodeURICompon
 
 /* ——— wire WA links ——— */
 function wireWa(){
-  ["waNav","waHero","waFab"].forEach(id=>{
+  ["waNav","waFab"].forEach(id=>{
     const el = document.getElementById(id);
     if(el) el.href = waLink(CONFIG.waMessage);
   });
