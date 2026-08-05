@@ -547,6 +547,52 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
 .menu-item:hover .mi-arr{transform:translateX(4px)}
 @media(max-width:680px){.menu-grid{grid-template-columns:1fr}}
 
+/* ===== PICKER ADMIN (Jual Akun) ===== */
+.admin-pick-overlay{
+  position:fixed;inset:0;z-index:200;display:none;
+  align-items:center;justify-content:center;padding:20px;
+  background:rgba(3,6,14,.72);backdrop-filter:blur(8px);
+}
+.admin-pick-overlay.open{display:flex}
+.admin-pick{
+  position:relative;width:min(520px,100%);background:var(--surface-solid);
+  border:1px solid var(--line);border-radius:24px;padding:28px;
+  box-shadow:0 40px 90px -30px rgba(0,0,0,.8);
+  animation:popIn .25s ease;
+}
+@keyframes popIn{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
+.admin-pick h3{font-size:19px;display:flex;align-items:center;gap:9px;margin-bottom:6px}
+.admin-pick > p{font-size:13.5px;color:var(--muted);margin-bottom:20px}
+.admin-pick-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.admin-pick-card{
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;
+  background:var(--card-bg);border:1px solid var(--line);border-radius:18px;padding:22px 16px;
+  cursor:pointer;transition:transform .2s,border-color .2s,background .2s;
+}
+.admin-pick-card:hover{transform:translateY(-4px);border-color:rgba(37,211,102,.55);background:var(--surface)}
+.admin-pick-card .ap-av{
+  width:54px;height:54px;border-radius:50%;display:grid;place-items:center;
+  font-size:20px;font-weight:800;color:#fff;background:var(--grad-wa);
+  box-shadow:0 10px 22px -8px rgba(37,211,102,.45);
+}
+.admin-pick-card:nth-child(2) .ap-av{background:var(--grad-main);box-shadow:0 10px 22px -8px var(--blue-glow)}
+.admin-pick-card b{font-size:15px}
+.admin-pick-card .ap-num{font-size:12.5px;color:var(--muted);font-family:var(--font-d);letter-spacing:.02em}
+.admin-pick-card .ap-btn{
+  margin-top:6px;width:100%;padding:11px;border-radius:12px;border:none;cursor:pointer;
+  background:var(--grad-wa);color:#fff;font-weight:800;font-size:13.5px;
+  display:flex;align-items:center;justify-content:center;gap:7px;transition:filter .2s;
+}
+.admin-pick-card:nth-child(2) .ap-btn{background:var(--grad-main)}
+.admin-pick-card .ap-btn:hover{filter:brightness(1.12)}
+.admin-pick-x{
+  position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;
+  border:1px solid var(--line);background:var(--surface);color:var(--muted);
+  font-size:15px;cursor:pointer;transition:color .2s,border-color .2s;
+}
+.admin-pick-x:hover{color:var(--ink);border-color:var(--blue)}
+@media(max-width:520px){.admin-pick-grid{grid-template-columns:1fr}.admin-pick{padding:22px}}
+
 /* ===== CEK DETAIL + BUKTI ===== */
 .cek-res.danger{flex-direction:column;align-items:flex-start;text-align:left}
 .cek-detail{width:100%;margin-top:12px;display:flex;flex-direction:column;gap:5px}
@@ -782,7 +828,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
       <a class="menu-item reveal" data-msg="Halo Admin REVI REKBER, minta info saluran & stok akun" href="#">
         <span class="mi-ic">🎮</span><span class="mi-txt"><b>Saluran / Info Stok Akun</b><small>List stok akun game yang tersedia</small></span><span class="mi-arr">→</span>
       </a>
-      <a class="menu-item reveal d1" data-msg="Halo Admin REVI REKBER, saya mau jual akun" href="#">
+      <a class="menu-item reveal d1" data-sell href="#">
         <span class="mi-ic">💰</span><span class="mi-txt"><b>Jual Akun Kesini</b><small>Titip jual akun kamu — laku cepat &amp; aman</small></span><span class="mi-arr">→</span>
       </a>
       <a class="menu-item reveal d2" data-msg="Halo Admin REVI REKBER, minta testimoni rekber & jual akun" href="#">
@@ -987,6 +1033,29 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
   <img id="modalImg" src="" alt="Pratinjau">
 </div>
 
+<!-- ===== PICKER ADMIN JUAL AKUN ===== -->
+<div class="admin-pick-overlay" id="adminPick" onclick="if(event.target===this)closeAdminPick()">
+  <div class="admin-pick">
+    <button class="admin-pick-x" onclick="closeAdminPick()" aria-label="Tutup">✕</button>
+    <h3>💰 Jual Akun</h3>
+    <p>Pilih admin yang mau kamu hubungi. Pesan otomatis akan terisi — tinggal kirim.</p>
+    <div class="admin-pick-grid">
+      <a class="admin-pick-card" href="#" data-admin="1">
+        <span class="ap-av">1</span>
+        <b>Admin 1</b>
+        <span class="ap-num">0851-5619-5534</span>
+        <span class="ap-btn">Chat Admin 1</span>
+      </a>
+      <a class="admin-pick-card" href="#" data-admin="2">
+        <span class="ap-av">2</span>
+        <b>Admin 2</b>
+        <span class="ap-num">0895-2453-0020</span>
+        <span class="ap-btn">Chat Admin 2</span>
+      </a>
+    </div>
+  </div>
+</div>
+
 <!-- ===== IMAGE VIEWER (layar penuh — zoom) ===== -->
 <div class="viewer" id="viewer">
   <button class="v-x" onclick="closeViewer()" aria-label="Tutup">✕</button>
@@ -1011,6 +1080,10 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
 const CONFIG = {
   waNumber: "6281234567890",                      // GANTI: nomor WA format 628xxx (tanpa +)
   waMessage: "Halo Admin REVI REKBER, saya mau tanya soal jasa rekber",  // pesan default WA
+  // ===== ADMIN JUAL AKUN (2 nomor) =====
+  waAdmin1: "6285156195534",                      // Admin 1 — 085156195534
+  waAdmin2: "6289524530020",                      // Admin 2 — 089524530020
+  waSellMessage: "Halo Admin REVI REKBER, saya mau jual akun. Berikut detail akun yang mau saya titipkan:",
   facebook: "https://facebook.com/",              // GANTI: link FB
   tiktok: "https://tiktok.com/",                  // GANTI: link TikTok
   // ===== GALERI =====
@@ -1035,11 +1108,32 @@ function wireWa(){
         if(el.dataset.modal === "infokontak") openViewer("infokontak");
         if(el.dataset.modal === "epep") openViewer("epep");
       });
+    } else if(el.dataset.sell !== undefined){
+      el.addEventListener("click", (e)=>{
+        e.preventDefault();
+        openAdminPick();
+      });
     } else {
       el.href = waLink(el.dataset.msg || CONFIG.waMessage);
     }
   });
+
+  // Picker admin jual akun → WA sesuai admin
+  document.querySelectorAll(".admin-pick-card").forEach(card=>{
+    card.addEventListener("click", (e)=>{
+      e.preventDefault();
+      const n = card.dataset.admin;
+      const num = n === "1" ? CONFIG.waAdmin1 : CONFIG.waAdmin2;
+      window.open(waLinkNum(num, CONFIG.waSellMessage), "_blank", "noopener");
+      closeAdminPick();
+    });
+  });
 }
+
+/* ——— ADMIN PICKER (jual akun) ——— */
+function openAdminPick(){ document.getElementById("adminPick").classList.add("open"); }
+function closeAdminPick(){ document.getElementById("adminPick").classList.remove("open"); }
+const waLinkNum = (num, msg) => `https://wa.me/${num}?text=${encodeURIComponent(msg)}`;
 
 /* ——— IMAGE VIEWER (layar penuh, zoom-out + geser) ——— */
 const VIEWERS = {
