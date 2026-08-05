@@ -773,13 +773,15 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
       <div class="carousel" id="carousel">
         <div class="carousel-track" id="carouselTrack">
           <div class="carousel-slide"><img src="img/banner-local.jpg" alt="Transaksi Lokal — Rekber Lokal" onclick="openModal(this.src)"></div>
-          <div class="carousel-slide"><img src="img/banner-intl.jpg" alt="Transaksi Internasional — Rekber Internasional" onclick="openModal(this.src)"></div>
+          <div class="carousel-slide"><img src="img/banner-intl-1.jpg" alt="Promo Banner 1" onclick="openModal(this.src)"></div>
+          <div class="carousel-slide"><img src="img/banner-intl-2.jpg" alt="Promo Banner 2" onclick="openModal(this.src)"></div>
         </div>
         <button class="carousel-arrow prev" onclick="moveCarousel(-1)">‹</button>
         <button class="carousel-arrow next" onclick="moveCarousel(1)">›</button>
         <div class="carousel-nav">
           <span class="carousel-dot active" onclick="goCarousel(0)"></span>
           <span class="carousel-dot" onclick="goCarousel(1)"></span>
+          <span class="carousel-dot" onclick="goCarousel(2)"></span>
         </div>
       </div>
       <div class="floating-card">
@@ -1103,7 +1105,7 @@ const CONFIG = {
   // Backend data penipu (API). Fallback otomatis ke DANGER_DB lokal kalau mati.
   apiBase: "https://api.revirekber.com",
   // ===== GALERI =====
-  banners: ["img/banner-local.jpg","img/banner-intl.jpg"],
+  banners: ["img/banner-local.jpg","img/banner-intl-1.jpg","img/banner-intl-2.jpg"],
 };
 /* ================================================================ */
 
