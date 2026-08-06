@@ -213,14 +213,18 @@ nav.scrolled{background:rgba(5,10,24,.9);border-bottom:1px solid var(--line);box
 .carousel-slide img{width:100%;aspect-ratio:16/9;object-fit:cover;cursor:zoom-in}
 .carousel-slide img.banner-cta{cursor:pointer}
 .banner-cta-hint{
-  position:absolute;left:16px;bottom:16px;z-index:3;
+  position:absolute;left:50%;transform:translateX(-50%);top:16px;z-index:4;
   display:flex;align-items:center;gap:10px;
-  background:rgba(8,20,12,.82);border:1px solid rgba(37,211,102,.55);
-  border-radius:14px;padding:10px 16px;cursor:pointer;
-  backdrop-filter:blur(6px);transition:transform .2s,background .2s;
+  background:rgba(8,20,12,.92);border:1px solid rgba(37,211,102,.6);
+  border-radius:14px;padding:8px 16px;cursor:pointer;
+  backdrop-filter:blur(6px);transition:transform .2s,background .2s,opacity .3s;
+  opacity:0;pointer-events:none;
+  box-shadow:0 8px 22px -6px rgba(0,0,0,.6);
   animation:hintPulse 2s ease-in-out infinite;
+  white-space:nowrap;
 }
-.banner-cta-hint:hover{transform:translateY(-3px);background:rgba(10,28,15,.95)}
+.banner-cta-hint.show{opacity:1;pointer-events:auto}
+.banner-cta-hint:hover{transform:translateX(-50%) translateY(-3px);background:rgba(10,28,15,.98)}
 .banner-cta-hint .hint-ic{
   width:38px;height:38px;border-radius:50%;background:var(--grad-wa);
   display:grid;place-items:center;color:#fff;flex-shrink:0;
@@ -1406,10 +1410,13 @@ function goCarousel(i){ slide = i; renderCarousel(); restartCarousel(); }
 function renderCarousel(){
   track.style.transform = `translateX(-${slide*100}%)`;
   dots.forEach((d,i)=>d.classList.toggle("active", i===slide));
+  const hint = document.querySelector(".banner-cta-hint");
+  if(hint) hint.classList.toggle("show", slide === dots.length - 1);
 }
 function restartCarousel(){
   clearInterval(timer);
-  timer = setInterval(()=>moveCarousel(1), 2000);
+  const delay = slide === dots.length - 1 ? 5000 : 2000;
+  timer = setInterval(()=>moveCarousel(1), delay);
 }
 restartCarousel();
 track.addEventListener("mouseenter", ()=>clearInterval(timer));
