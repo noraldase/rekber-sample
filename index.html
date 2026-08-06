@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>REVI REKBER — Admin Rekber & Toko Game Terpercaya</title>
-<meta name="description" content="Layanan rekening bersama (rekber) terpercaya oleh Revi Sri Mega Azzahra. Transaksi lokal & internasional aman: game, akun, dan barang. PayPal, Gopay, Bank.">
+<meta name="description" content="Layanan rekening bersama (rekber) terpercaya oleh Revi Sri Mega Azzahra. Transaksi lokal aman: game, akun, dan barang. GoPay, DANA, Bank.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
@@ -422,6 +422,8 @@ nav.scrolled{background:rgba(5,10,24,.9);border-bottom:1px solid var(--line);box
 .pay-chip:hover{transform:translateY(-2px);border-color:var(--bc,rgba(91,154,255,.5));box-shadow:0 10px 24px -12px var(--bc,var(--blue-glow))}
 .pay-chip .lg{width:19px;height:19px;flex:none;display:grid;place-items:center}
 .pay-chip .lg svg{width:100%;height:100%;fill:currentColor}
+.pay-chip.lg-img .lg{width:auto;height:20px}
+.pay-chip.lg-img .lg img{height:20px;width:auto;max-width:60px;object-fit:contain;display:block}
 .pay-chip .bt{font-weight:800;font-family:var(--font-d);letter-spacing:-.01em}
 .pay-chip small{font-weight:600;color:var(--muted);font-size:12px}
 .c-wa{color:#25d366}.c-fb{color:#1877f2}.c-tt{color:#000}.c-tt svg{fill:#010101}
@@ -764,7 +766,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
     <div>
       <span class="badge"><span class="dot"></span> Rekber &amp; Toko Game Terpercaya</span>
       <h1>Transaksi Aman Bersama<br><span class="grad">Revi Sri Mega Azzahra</span></h1>
-      <p class="lead">Layanan rekening bersama (rekber) yang mengutamakan keamanan transaksi, proses cepat, dan pelayanan profesional — untuk jual beli game, akun, dan barang, lokal maupun internasional.</p>
+      <p class="lead">Layanan rekening bersama (rekber) yang mengutamakan keamanan transaksi, proses cepat, dan pelayanan profesional — untuk jual beli game, akun, dan barang, lokal.</p>
       <div class="hero-actions">
         <a class="btn btn-blue" id="waHero" href="https://www.facebook.com/profile.php?id=100093453295456" target="_blank" rel="noopener">Mulai Transaksi →</a>
         <a class="btn btn-ghost" href="#panduan">Pelajari Cara Kerja</a>
@@ -918,21 +920,15 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
   <div class="container">
     <span class="section-tag reveal">💳 Metode Pembayaran</span>
     <h2 class="reveal">Pembayaran yang Kami Terima</h2>
-    <p class="lead reveal">Beragam metode pembayaran lokal &amp; internasional — pilih yang paling nyaman untuk kamu.</p>
+    <p class="lead reveal">Beragam metode pembayaran lokal — pilih yang paling nyaman untuk kamu.</p>
     <div class="pay-card reveal">
       <div class="pay-row">
-        <span class="pay-chip c-bg c-bg-bca c-bca"><span class="bt">BCA</span><small>Bank</small></span>
-        <span class="pay-chip c-bg c-bg-bri c-bri"><span class="bt">BRI</span><small>Bank</small></span>
-        <span class="pay-chip c-bg c-bg-mdr c-mdr"><span class="bt">Mandiri</span><small>Bank</small></span>
-        <span class="pay-chip c-bg c-bg-bni c-bni"><span class="bt">BNI</span><small>Bank</small></span>
-        <span class="pay-chip c-bg c-bg-gopay c-gopay"><span class="bt">GoPay</span><small>E-Wallet</small></span>
-        <span class="pay-chip c-bg c-bg-ovo c-ovo"><span class="bt">OVO</span><small>E-Wallet</small></span>
-        <span class="pay-chip c-bg c-bg-dana c-dana"><span class="bt">DANA</span><small>E-Wallet</small></span>
-        <span class="pay-chip c-bg c-bg-shopee c-shopee"><span class="bt">ShopeePay</span><small>E-Wallet</small></span>
-      </div>
-      <div class="pay-intl">
-        <span class="pay-chip c-pp"><span class="lg"><svg><use href="#i-pp"/></svg></span><span class="bt">PayPal</span><small>Internasional</small></span>
-        <span class="pay-chip c-wise"><span class="lg"><svg><use href="#i-wise"/></svg></span><span class="bt">Wise</span><small>Internasional</small></span>
+        <span class="pay-chip lg-img"><span class="lg"><img src="img/payment/bri.svg" alt="BRI" loading="lazy"></span><span class="bt">BRI</span></span>
+        <span class="pay-chip lg-img"><span class="lg"><img src="img/payment/bca.svg" alt="BCA" loading="lazy"></span><span class="bt">BCA</span></span>
+        <span class="pay-chip lg-img"><span class="lg"><img src="img/payment/seabank.svg" alt="SeaBank" loading="lazy"></span><span class="bt">SeaBank</span></span>
+        <span class="pay-chip lg-img"><span class="lg"><img src="img/payment/qris.svg" alt="QRIS" loading="lazy"></span><span class="bt">QRIS</span></span>
+        <span class="pay-chip lg-img"><span class="lg"><img src="img/payment/dana.svg" alt="DANA" loading="lazy"></span><span class="bt">DANA</span></span>
+        <span class="pay-chip lg-img"><span class="lg"><img src="img/payment/shopeepay.svg" alt="ShopeePay" loading="lazy"></span><span class="bt">ShopeePay</span></span>
       </div>
     </div>
   </div>
@@ -959,7 +955,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
       </div>
       <div class="faq-item reveal">
         <button class="faq-q" onclick="toggleFaq(this)"><span><span class="q-n">04</span>Metode pembayaran apa saja yang tersedia?</span><span class="chev">▾</span></button>
-        <div class="faq-a"><p>Transfer bank lokal (BCA, BRI, Mandiri, dll), e-wallet (Gopay, OVO, DANA), serta pembayaran internasional (PayPal, Wise).</p></div>
+        <div class="faq-a"><p>Transfer bank lokal (BRI, BCA, SeaBank), QRIS, dan e-wallet (DANA, ShopeePay).</p></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q" onclick="toggleFaq(this)"><span><span class="q-n">05</span>Pembeli minta cancel karena alasan BU / ganti penjual, apakah bisa?</span><span class="chev">▾</span></button>
