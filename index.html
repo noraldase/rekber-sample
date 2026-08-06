@@ -823,12 +823,18 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
         <span class="hint-txt"><b>Klik → Chat Admin</b><small>Jasa Rebind &amp; Hapus Akun Epep</small></span>
         <span class="hint-arrow">▼</span>
       </div>
+      <div class="banner-cta-hint" id="bannerLapor" onclick="window.open(waLink(CONFIG.waLaporMessage),'_blank')">
+        <span class="hint-ic"><svg><use href="#i-wa"/></svg></span>
+        <span class="hint-txt"><b>Klik → Laporkan Penipu Sekarang Juga</b><small>Lapor pelaku penipuan / scam</small></span>
+        <span class="hint-arrow">▼</span>
+      </div>
       <div class="carousel" id="carousel">
         <div class="carousel-track" id="carouselTrack">
           <div class="carousel-slide"><img src="img/banner-local.jpg" alt="Transaksi Lokal — Rekber Lokal" onclick="openModal(this.src)"></div>
           <div class="carousel-slide"><img src="img/banner-intl-1.jpg" alt="Promo Banner 1" onclick="openModal(this.src)"></div>
           <div class="carousel-slide"><img src="img/banner-intl-2.jpg" alt="Promo Banner 2" onclick="openModal(this.src)"></div>
           <div class="carousel-slide"><img class="banner-cta" src="img/banner-epep.jpg" alt="Amanin Akun Epep — Hubungi Admin" onclick="window.open(waLink(CONFIG.waRebindMessage),'_blank')"></div>
+          <div class="carousel-slide"><img class="banner-cta" src="img/banner-lapor.jpg" alt="Laporkan Penipu — Hubungi Admin" onclick="window.open(waLink(CONFIG.waLaporMessage),'_blank')"></div>
         </div>
         <button class="carousel-arrow prev" onclick="moveCarousel(-1)">‹</button>
         <button class="carousel-arrow next" onclick="moveCarousel(1)">›</button>
@@ -837,6 +843,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
           <span class="carousel-dot" onclick="goCarousel(1)"></span>
           <span class="carousel-dot" onclick="goCarousel(2)"></span>
           <span class="carousel-dot" onclick="goCarousel(3)"></span>
+          <span class="carousel-dot" onclick="goCarousel(4)"></span>
         </div>
       </div>
       <div class="floating-card">
@@ -1423,8 +1430,11 @@ function goCarousel(i){ slide = i; renderCarousel(); restartCarousel(); }
 function renderCarousel(){
   track.style.transform = `translateX(-${slide*100}%)`;
   dots.forEach((d,i)=>d.classList.toggle("active", i===slide));
-  const hint = document.getElementById("bannerHint");
-  if(hint) hint.classList.toggle("show", slide === dots.length - 1);
+  const last = dots.length - 1;
+  const hintEpep = document.getElementById("bannerHint");
+  const hintLapor = document.getElementById("bannerLapor");
+  if(hintEpep) hintEpep.classList.toggle("show", slide === last - 1);
+  if(hintLapor) hintLapor.classList.toggle("show", slide === last);
 }
 function restartCarousel(){
   clearInterval(timer);
