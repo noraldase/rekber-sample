@@ -213,17 +213,19 @@ nav.scrolled{background:rgba(5,10,24,.9);border-bottom:1px solid var(--line);box
 .carousel-slide img{width:100%;aspect-ratio:16/9;object-fit:cover;cursor:zoom-in}
 .carousel-slide img.banner-cta{cursor:pointer}
 .banner-cta-hint{
-  position:absolute;left:50%;transform:translateX(-50%);top:16px;z-index:4;
+  position:absolute;left:50%;transform:translateX(-50%);top:-30px;z-index:5;
   display:flex;align-items:center;gap:10px;
-  background:rgba(8,20,12,.92);border:1px solid rgba(37,211,102,.6);
+  background:rgba(8,20,12,.95);border:1px solid rgba(37,211,102,.65);
   border-radius:14px;padding:8px 16px;cursor:pointer;
-  backdrop-filter:blur(6px);transition:transform .2s,background .2s,opacity .3s;
+  backdrop-filter:blur(6px);transition:transform .2s,background .2s,opacity .35s;
   opacity:0;pointer-events:none;
-  box-shadow:0 8px 22px -6px rgba(0,0,0,.6);
-  animation:hintPulse 2s ease-in-out infinite;
+  box-shadow:0 10px 28px -8px rgba(0,0,0,.7),0 0 22px -4px rgba(37,211,102,.35);
   white-space:nowrap;
 }
-.banner-cta-hint.show{opacity:1;pointer-events:auto}
+.banner-cta-hint.show{
+  opacity:1;pointer-events:auto;
+  animation:hintDrop .45s cubic-bezier(.34,1.56,.64,1) both, hintPulse 2.2s ease-in-out .45s infinite;
+}
 .banner-cta-hint:hover{transform:translateX(-50%) translateY(-3px);background:rgba(10,28,15,.98)}
 .banner-cta-hint .hint-ic{
   width:38px;height:38px;border-radius:50%;background:var(--grad-wa);
@@ -233,9 +235,21 @@ nav.scrolled{background:rgba(5,10,24,.9);border-bottom:1px solid var(--line);box
 .banner-cta-hint .hint-txt{display:flex;flex-direction:column;line-height:1.25}
 .banner-cta-hint .hint-txt b{color:#fff;font-size:13.5px;font-weight:800}
 .banner-cta-hint .hint-txt small{color:rgba(255,255,255,.78);font-size:11px}
+.banner-cta-hint .hint-arrow{
+  color:#25d366;font-size:15px;font-weight:900;animation:arrowBob 1.2s ease-in-out infinite;
+  margin-left:4px;
+}
+@keyframes hintDrop{
+  from{opacity:0;transform:translateX(-50%) translateY(-18px) scale(.92)}
+  to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}
+}
+@keyframes arrowBob{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(4px)}
+}
 @keyframes hintPulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.45)}
-  50%{box-shadow:0 0 0 9px rgba(37,211,102,0)}
+  0%,100%{box-shadow:0 10px 28px -8px rgba(0,0,0,.7),0 0 22px -4px rgba(37,211,102,.35)}
+  50%{box-shadow:0 10px 28px -8px rgba(0,0,0,.7),0 0 34px -2px rgba(37,211,102,.7)}
 }
 .carousel-nav{
   position:absolute;bottom:16px;right:16px;display:flex;gap:8px;z-index:3;
@@ -804,18 +818,17 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
       </div>
     </div>
     <div class="hero-visual">
+      <div class="banner-cta-hint" id="bannerHint" onclick="window.open(waLink(CONFIG.waRebindMessage),'_blank')">
+        <span class="hint-ic"><svg><use href="#i-wa"/></svg></span>
+        <span class="hint-txt"><b>Klik → Chat Admin</b><small>Jasa Rebind &amp; Hapus Akun Epep</small></span>
+        <span class="hint-arrow">▼</span>
+      </div>
       <div class="carousel" id="carousel">
         <div class="carousel-track" id="carouselTrack">
           <div class="carousel-slide"><img src="img/banner-local.jpg" alt="Transaksi Lokal — Rekber Lokal" onclick="openModal(this.src)"></div>
           <div class="carousel-slide"><img src="img/banner-intl-1.jpg" alt="Promo Banner 1" onclick="openModal(this.src)"></div>
           <div class="carousel-slide"><img src="img/banner-intl-2.jpg" alt="Promo Banner 2" onclick="openModal(this.src)"></div>
-          <div class="carousel-slide">
-            <img class="banner-cta" src="img/banner-epep.jpg" alt="Amanin Akun Epep — Hubungi Admin" onclick="window.open(waLink(CONFIG.waRebindMessage),'_blank')">
-            <div class="banner-cta-hint" onclick="window.open(waLink(CONFIG.waRebindMessage),'_blank')">
-              <span class="hint-ic"><svg><use href="#i-wa"/></svg></span>
-              <span class="hint-txt"><b>Klik → Chat Admin</b><small>Jasa Rebind &amp; Hapus Akun Epep</small></span>
-            </div>
-          </div>
+          <div class="carousel-slide"><img class="banner-cta" src="img/banner-epep.jpg" alt="Amanin Akun Epep — Hubungi Admin" onclick="window.open(waLink(CONFIG.waRebindMessage),'_blank')"></div>
         </div>
         <button class="carousel-arrow prev" onclick="moveCarousel(-1)">‹</button>
         <button class="carousel-arrow next" onclick="moveCarousel(1)">›</button>
@@ -1410,7 +1423,7 @@ function goCarousel(i){ slide = i; renderCarousel(); restartCarousel(); }
 function renderCarousel(){
   track.style.transform = `translateX(-${slide*100}%)`;
   dots.forEach((d,i)=>d.classList.toggle("active", i===slide));
-  const hint = document.querySelector(".banner-cta-hint");
+  const hint = document.getElementById("bannerHint");
   if(hint) hint.classList.toggle("show", slide === dots.length - 1);
 }
 function restartCarousel(){
