@@ -209,9 +209,30 @@ nav.scrolled{background:rgba(5,10,24,.9);border-bottom:1px solid var(--line);box
 }
 .carousel::before{content:"";position:absolute;inset:0;border-radius:22px;padding:1px;background:linear-gradient(140deg,rgba(91,154,255,.5),transparent 40%,transparent 60%,rgba(56,225,255,.35));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:3}
 .carousel-track{display:flex;transition:transform .55s cubic-bezier(.4,0,.2,1)}
-.carousel-slide{min-width:100%}
+.carousel-slide{min-width:100%;position:relative}
 .carousel-slide img{width:100%;aspect-ratio:16/9;object-fit:cover;cursor:zoom-in}
 .carousel-slide img.banner-cta{cursor:pointer}
+.banner-cta-hint{
+  position:absolute;left:16px;bottom:16px;z-index:3;
+  display:flex;align-items:center;gap:10px;
+  background:rgba(8,20,12,.82);border:1px solid rgba(37,211,102,.55);
+  border-radius:14px;padding:10px 16px;cursor:pointer;
+  backdrop-filter:blur(6px);transition:transform .2s,background .2s;
+  animation:hintPulse 2s ease-in-out infinite;
+}
+.banner-cta-hint:hover{transform:translateY(-3px);background:rgba(10,28,15,.95)}
+.banner-cta-hint .hint-ic{
+  width:38px;height:38px;border-radius:50%;background:var(--grad-wa);
+  display:grid;place-items:center;color:#fff;flex-shrink:0;
+}
+.banner-cta-hint .hint-ic svg{width:20px;height:20px}
+.banner-cta-hint .hint-txt{display:flex;flex-direction:column;line-height:1.25}
+.banner-cta-hint .hint-txt b{color:#fff;font-size:13.5px;font-weight:800}
+.banner-cta-hint .hint-txt small{color:rgba(255,255,255,.78);font-size:11px}
+@keyframes hintPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.45)}
+  50%{box-shadow:0 0 0 9px rgba(37,211,102,0)}
+}
 .carousel-nav{
   position:absolute;bottom:16px;right:16px;display:flex;gap:8px;z-index:3;
 }
@@ -784,7 +805,13 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
           <div class="carousel-slide"><img src="img/banner-local.jpg" alt="Transaksi Lokal — Rekber Lokal" onclick="openModal(this.src)"></div>
           <div class="carousel-slide"><img src="img/banner-intl-1.jpg" alt="Promo Banner 1" onclick="openModal(this.src)"></div>
           <div class="carousel-slide"><img src="img/banner-intl-2.jpg" alt="Promo Banner 2" onclick="openModal(this.src)"></div>
-          <div class="carousel-slide"><img class="banner-cta" src="img/banner-epep.jpg" alt="Amanin Akun Epep — Hubungi Admin" onclick="window.open(waLink(CONFIG.waRebindMessage),'_blank')"></div>
+          <div class="carousel-slide">
+            <img class="banner-cta" src="img/banner-epep.jpg" alt="Amanin Akun Epep — Hubungi Admin" onclick="window.open(waLink(CONFIG.waRebindMessage),'_blank')">
+            <div class="banner-cta-hint" onclick="window.open(waLink(CONFIG.waRebindMessage),'_blank')">
+              <span class="hint-ic"><svg><use href="#i-wa"/></svg></span>
+              <span class="hint-txt"><b>Klik → Chat Admin</b><small>Jasa Rebind &amp; Hapus Akun Epep</small></span>
+            </div>
+          </div>
         </div>
         <button class="carousel-arrow prev" onclick="moveCarousel(-1)">‹</button>
         <button class="carousel-arrow next" onclick="moveCarousel(1)">›</button>
@@ -1382,7 +1409,7 @@ function renderCarousel(){
 }
 function restartCarousel(){
   clearInterval(timer);
-  timer = setInterval(()=>moveCarousel(1), 5000);
+  timer = setInterval(()=>moveCarousel(1), 2000);
 }
 restartCarousel();
 track.addEventListener("mouseenter", ()=>clearInterval(timer));
