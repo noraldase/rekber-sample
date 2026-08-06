@@ -830,12 +830,12 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
       </div>
       <div class="carousel" id="carousel">
         <div class="carousel-track" id="carouselTrack">
-          <div class="carousel-slide"><img src="img/banner-local.jpg" alt="Transaksi Lokal — Rekber Lokal" onclick="openModal(this.src)"></div>
-          <div class="carousel-slide"><img src="img/banner-intl-1.jpg" alt="Promo Banner 1" onclick="openModal(this.src)"></div>
-          <div class="carousel-slide"><img src="img/banner-intl-2.jpg" alt="Promo Banner 2" onclick="openModal(this.src)"></div>
-          <div class="carousel-slide"><img class="banner-cta" src="img/banner-epep.jpg" alt="Amanin Akun Epep — Hubungi Admin" onclick="window.open(waLink(CONFIG.waRebindMessage),'_blank')"></div>
-          <div class="carousel-slide"><img class="banner-cta" src="img/banner-lapor.jpg" alt="Laporkan Penipu — Hubungi Admin" onclick="window.open(waLink(CONFIG.waLaporMessage),'_blank')"></div>
-        </div>
+                  <div class="carousel-slide"><img src="img/banner-local.jpg" alt="Transaksi Lokal — Rekber Lokal" onclick="openModal(this.src)"></div>
+                  <div class="carousel-slide"><img class="banner-cta" src="img/banner-epep.jpg" alt="Amanin Akun Epep — Hubungi Admin" onclick="window.open(waLink(CONFIG.waRebindMessage),'_blank')"></div>
+                  <div class="carousel-slide"><img class="banner-cta" src="img/banner-lapor.jpg" alt="Laporkan Penipu — Hubungi Admin" onclick="window.open(waLink(CONFIG.waLaporMessage),'_blank')"></div>
+                  <div class="carousel-slide"><img src="img/banner-intl-1.jpg" alt="Promo Banner 1" onclick="openModal(this.src)"></div>
+                  <div class="carousel-slide"><img src="img/banner-intl-2.jpg" alt="Promo Banner 2" onclick="openModal(this.src)"></div>
+                </div>
         <button class="carousel-arrow prev" onclick="moveCarousel(-1)">‹</button>
         <button class="carousel-arrow next" onclick="moveCarousel(1)">›</button>
         <div class="carousel-nav">
@@ -1430,16 +1430,14 @@ function goCarousel(i){ slide = i; renderCarousel(); restartCarousel(); }
 function renderCarousel(){
   track.style.transform = `translateX(-${slide*100}%)`;
   dots.forEach((d,i)=>d.classList.toggle("active", i===slide));
-  const last = dots.length - 1;
   const hintEpep = document.getElementById("bannerHint");
   const hintLapor = document.getElementById("bannerLapor");
-  if(hintEpep) hintEpep.classList.toggle("show", slide === last - 1);
-  if(hintLapor) hintLapor.classList.toggle("show", slide === last);
+  if(hintEpep) hintEpep.classList.toggle("show", slide === 1);
+  if(hintLapor) hintLapor.classList.toggle("show", slide === 2);
 }
 function restartCarousel(){
   clearInterval(timer);
-  const delay = slide === dots.length - 1 ? 5000 : 2000;
-  timer = setInterval(()=>moveCarousel(1), delay);
+  timer = setInterval(()=>moveCarousel(1), 3000);
 }
 restartCarousel();
 track.addEventListener("mouseenter", ()=>clearInterval(timer));
