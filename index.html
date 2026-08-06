@@ -211,6 +211,7 @@ nav.scrolled{background:rgba(5,10,24,.9);border-bottom:1px solid var(--line);box
 .carousel-track{display:flex;transition:transform .55s cubic-bezier(.4,0,.2,1)}
 .carousel-slide{min-width:100%}
 .carousel-slide img{width:100%;aspect-ratio:16/9;object-fit:cover;cursor:zoom-in}
+.carousel-slide img.banner-cta{cursor:pointer}
 .carousel-nav{
   position:absolute;bottom:16px;right:16px;display:flex;gap:8px;z-index:3;
 }
@@ -783,6 +784,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
           <div class="carousel-slide"><img src="img/banner-local.jpg" alt="Transaksi Lokal — Rekber Lokal" onclick="openModal(this.src)"></div>
           <div class="carousel-slide"><img src="img/banner-intl-1.jpg" alt="Promo Banner 1" onclick="openModal(this.src)"></div>
           <div class="carousel-slide"><img src="img/banner-intl-2.jpg" alt="Promo Banner 2" onclick="openModal(this.src)"></div>
+          <div class="carousel-slide"><img class="banner-cta" src="img/banner-epep.jpg" alt="Amanin Akun Epep — Hubungi Admin" onclick="window.open(waLink(CONFIG.waRebindMessage),'_blank')"></div>
         </div>
         <button class="carousel-arrow prev" onclick="moveCarousel(-1)">‹</button>
         <button class="carousel-arrow next" onclick="moveCarousel(1)">›</button>
@@ -790,6 +792,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:64px 0
           <span class="carousel-dot active" onclick="goCarousel(0)"></span>
           <span class="carousel-dot" onclick="goCarousel(1)"></span>
           <span class="carousel-dot" onclick="goCarousel(2)"></span>
+          <span class="carousel-dot" onclick="goCarousel(3)"></span>
         </div>
       </div>
       <div class="floating-card">
